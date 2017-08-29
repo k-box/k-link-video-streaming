@@ -167,6 +167,7 @@ return [
          * Package Service Providers...
          */
         Laravel\Tinker\TinkerServiceProvider::class,
+        Avvertix\TusUpload\Providers\TusUploadServiceProvider::class,
 
         /*
          * Application Service Providers...

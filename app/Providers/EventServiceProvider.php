@@ -5,6 +5,12 @@ namespace App\Providers;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
+use Avvertix\TusUpload\Events\TusUploadCompleted;
+use Avvertix\TusUpload\Events\TusUploadCancelled;
+
+use App\Listeners\TusUploadCompletedHandler;
+use App\Listeners\TusUploadCancelledHandler;
+
 class EventServiceProvider extends ServiceProvider
 {
     /**
@@ -13,8 +19,11 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        'App\Events\Event' => [
-            'App\Listeners\EventListener',
+        TusUploadCancelled::class => [
+            TusUploadCancelledHandler::class,
+        ],
+        TusUploadCompleted::class => [
+            TusUploadCompletedHandler::class,
         ],
     ];
 
