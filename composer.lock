@@ -4,15 +4,15 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "99ffd80774443b7bf00d73f1c8982e45",
+    "content-hash": "36afa535a0e0a6d0a625274d4d794c1c",
     "packages": [
         {
             "name": "avvertix/laravel-tus-upload",
-            "version": "dev-master",
+            "version": "dev-route-registration-changes",
             "source": {
                 "type": "git",
                 "url": "https://git.klink.asia/alessio.vertemati/laravel-tus-upload",
-                "reference": "f2f1cc0960f7a04853084d6e8bc7dc21a42eacf7"
+                "reference": "2bb3a3223ad32057f4a9e84ecf0cf6ef2bdd2efc"
             },
             "require": {
                 "illuminate/auth": "5.4.*",
@@ -57,7 +57,7 @@
                 "tus",
                 "upload"
             ],
-            "time": "2017-08-01 12:27:28"
+            "time": "2017-08-29 18:28:11"
         },
         {
             "name": "dnoegel/php-xdg-base-dir",
