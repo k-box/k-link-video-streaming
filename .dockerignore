@@ -1,0 +1,8 @@
+.git*
+phpunit.xml
+composer.*
+package.json
+server.php
+webpack.mix.js
+node_modules
+storage
