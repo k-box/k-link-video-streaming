@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Video;
 use App\VideoRepository;
 use App\Http\Requests\VideoAddRequest;
+use App\Http\Requests\VideoGetRequest;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Avvertix\TusUpload\TusUploadRepository;
@@ -66,24 +67,41 @@ class VideoController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Display the information about a video file.
      *
-     * @param  \App\Video  $video
+     * @param  \App\Http\Requests\VideoGetRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function show(Video $video)
+    public function show(VideoGetRequest $request)
     {
-        //
+        $video = $this->videos->find($request->input('params.video_id'));
+
+        $data = [
+            'request_id' => $request->input('id'),
+            'response' => $video,
+        ];
+
+        return response()->json($data);
+
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified video.
      *
-     * @param  \App\Video  $video
+     * @param  \App\Http\Requests\VideoGetRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Video $video)
+    public function destroy(VideoGetRequest $request)
     {
-        //
+        $video = $this->videos->delete($request->input('params.video_id'));
+        
+        $video->deleted = true;
+
+        $data = [
+            'request_id' => $request->input('id'),
+            'response' => $video,
+        ];
+
+        return response()->json($data);
     }
 }

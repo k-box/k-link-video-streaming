@@ -58,9 +58,38 @@ In addition to the file, the following metadata attributes must be added:
 
 ### `video.get`
 
-_to be implemented, API not defined yet_
+Get the details of a video file.
+
+**Parameters**
+
+- `video_id` (`string`, `required`): The identifier of the video
+
+**Return**
+
+A json object with the following properites is returned
+
+- `video_id`: the unique identifier of the video
+- `status`: the status of the video, see [Video Status](./video-status.md) for a complete list of the possible values
+- `created_at`: when the video was added to the streaming service
+
+> The return object is not complete, expect changes before the first release
 
 ### `video.delete`
 
-_to be implemented, API not defined yet_
+Delete a previously added video.
+
+**Parameters**
+
+- `video_id` (`string`, `required`): The identifier of the video
+
+**Return**
+
+The data about the original video are returned. 
+
+- `video_id`: the unique identifier of the video
+- `status`: the status of the video, see [Video Status](./video-status.md) for a complete list of the possible values
+- `created_at`: when the video was added to the streaming service
+- `deleted`: a boolean that indicate if the deletion was completed,
+
+> The return object is not complete, expect changes before the first release
 

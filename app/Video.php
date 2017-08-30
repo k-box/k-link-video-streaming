@@ -92,8 +92,35 @@ class Video extends Model
         'updated_at',
         'cancelled_at',
         'completed_at',
-        'failed_at'
+        'queued_at',
+        'failed_at',
     ];
+
+    /**
+     * The attributes that should be hidden from the serialization.
+     *
+     * @var array
+     */
+     protected $hidden = [
+         'id', 
+         'completed_at', 
+         'cancelled_at', 
+         'queued_at', 
+         'failed_at',
+         'application_id',
+         'upload_id',
+         'upload',
+         'original_video_filename',
+         'original_video_mimetype',
+         'path',
+    ];
+
+    /**
+     * The accessors to append to the model's array form.
+     *
+     * @var array
+     */
+     protected $appends = ['status'];
 
     /**
      * Set the completed attribute
@@ -273,28 +300,32 @@ class Video extends Model
       */
       public function getStatusAttribute($value = null)
       {
+
+        $this->attributes['status'] = self::STATUS_PENDING;
+        
+        if($this->upload){
+
+            if($this->upload->started)
+              $this->attributes['status'] = self::STATUS_UPLOADING;
+  
+            if($this->upload->cancelled)
+              $this->attributes['status'] = self::STATUS_CANCELLED;
+        }
+
           if($this->completed)
-            return self::STATUS_COMPLETED;
+            $this->attributes['status'] = self::STATUS_COMPLETED;
 
           if($this->cancelled)
-            return self::STATUS_CANCELLED;
+            $this->attributes['status'] = self::STATUS_CANCELLED;
           
           if($this->failed)
-            return self::STATUS_FAILED;
+            $this->attributes['status'] = self::STATUS_FAILED;
           
           if($this->queued)
-            return self::STATUS_QUEUED;
+            $this->attributes['status'] = self::STATUS_QUEUED;
         
-            if($this->upload){
 
-                if($this->upload->started)
-                  return self::STATUS_UPLOADING;
-      
-                if($this->upload->cancelled)
-                  return self::STATUS_CANCELLED;
-            }
-
-          return self::STATUS_PENDING;
+          return $this->attributes['status'];
       }
 
     /**

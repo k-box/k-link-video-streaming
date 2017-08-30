@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Livello_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="849.306px" height="194.127px" viewBox="0 0 849.306 194.127" enable-background="new 0 0 849.306 194.127"
+	 xml:space="preserve">
+<ellipse fill="#D9E021" cx="49.653" cy="28.819" rx="49.653" ry="28.819"/>
+<circle fill="#D9E021" cx="748" cy="138" r="12"/>
+<circle fill="#FBB03B" cx="748" cy="173" r="12"/>
+<ellipse fill="#CCCCCC" cx="230.653" cy="28.819" rx="49.653" ry="28.819"/>
+<ellipse fill="#CCCCCC" cx="418.055" cy="28.819" rx="49.653" ry="28.819"/>
+<ellipse fill="#CCCCCC" cx="598.653" cy="28.819" rx="49.653" ry="28.819"/>
+<ellipse fill="#FBB03B" cx="230.653" cy="165.307" rx="49.653" ry="28.82"/>
+<ellipse fill="#FBB03B" cx="422.653" cy="165.307" rx="49.653" ry="28.82"/>
+<ellipse fill="#FBB03B" cx="799.653" cy="28.819" rx="49.653" ry="28.82"/>
+<text transform="matrix(1 0 0 1 22.2075 33.3057)" font-family="'MyriadPro-Regular'" font-size="14">PENDING</text>
+<text transform="matrix(1 0 0 1 763.2217 141.7222)" font-family="'MyriadPro-Regular'" font-size="12">starting state</text>
+<text transform="matrix(1 0 0 1 763.2217 178.5278)" font-family="'MyriadPro-Regular'" font-size="12">ending state</text>
+<text transform="matrix(1 0 0 1 392.6245 33.3057)" font-family="'MyriadPro-Regular'" font-size="14">QUEUED</text>
+<text transform="matrix(1 0 0 1 561.5078 33.3057)" font-family="'MyriadPro-Regular'" font-size="14">PROCESSING</text>
+<text transform="matrix(1 0 0 1 763.5713 33.3057)" font-family="'MyriadPro-Regular'" font-size="14">COMPLETED</text>
+<text transform="matrix(1 0 0 1 194.5669 33.3057)" font-family="'MyriadPro-Regular'" font-size="14">UPLOADING</text>
+<text transform="matrix(1 0 0 1 402.2798 169.417)" font-family="'MyriadPro-Regular'" font-size="14">FAILED</text>
+<text transform="matrix(1 0 0 1 195.5259 169.417)" font-family="'MyriadPro-Regular'" font-size="14">CANCELLED</text>
+<g>
+	<g>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="83.056" y1="28.667" x2="178.056" y2="28.667"/>
+		<g>
+			<polygon points="176.056,33.653 184.69,28.667 176.056,23.681 			"/>
+		</g>
+	</g>
+</g>
+<g>
+	<g>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="276.056" y1="28.667" x2="371.056" y2="28.667"/>
+		<g>
+			<polygon points="369.056,33.653 377.69,28.667 369.056,23.681 			"/>
+		</g>
+	</g>
+</g>
+<g>
+	<g>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="230.556" y1="46.167" x2="230.556" y2="140.167"/>
+		<g>
+			<polygon points="226.069,139.167 231.055,147.801 236.042,139.167 			"/>
+		</g>
+	</g>
+</g>
+<g>
+	<g>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="599.027" y1="45.667" x2="435.272" y2="140.082"/>
+		<g>
+			<polygon points="434.046,135.034 429.056,143.666 439.026,143.673 			"/>
+		</g>
+	</g>
+</g>
+<g>
+	<g>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="236.944" y1="45.667" x2="416.707" y2="140.323"/>
+		<g>
+			<polygon points="413.092,144.056 423.056,143.667 417.738,135.232 			"/>
+		</g>
+	</g>
+</g>
+<g>
+	<g>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="453.056" y1="28.667" x2="548.056" y2="28.667"/>
+		<g>
+			<polygon points="546.056,33.653 554.69,28.667 546.056,23.681 			"/>
+		</g>
+	</g>
+</g>
+<g>
+	<g>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="649.056" y1="28.667" x2="744.056" y2="28.667"/>
+		<g>
+			<polygon points="742.056,33.653 750.69,28.667 742.056,23.681 			"/>
+		</g>
+	</g>
+</g>
+</svg>

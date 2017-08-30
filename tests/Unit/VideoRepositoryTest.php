@@ -5,6 +5,7 @@ namespace Tests\Unit;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Avvertix\TusUpload\TusUpload;
 use App\VideoRepository;
 use App\Video;
 use Illuminate\Support\Facades\Storage;
@@ -42,5 +43,63 @@ class VideoRepositoryTest extends TestCase
         $retrieved = $repository->find($video->video_id);
 
         $this->assertEquals($video->toArray(), $retrieved->toArray());
+    }
+
+
+    public function test_video_is_deleted()
+    {
+        Storage::fake('local');
+
+        $repository = app(VideoRepository::class);
+        
+        $video = $repository->create('1', '1', 'test.mp4', 'video/mp4');
+
+        $video_file = $video->path . '/'.$video->video_id.'.mp4';
+        
+        Storage::disk('local')->put($video_file, 'Test Content');
+
+        $deletedVideo = $repository->delete($video->video_id);
+
+        $this->assertInstanceOf(\App\Video::class, $deletedVideo);
+
+        $this->assertNull($repository->find($video->video_id));
+
+        Storage::disk('local')->assertMissing($video_file);
+
+    }
+    
+    public function test_video_and_tusupload_are_deleted()
+    {
+        Storage::fake('local');
+        
+        $repository = app(VideoRepository::class);
+
+        $upload = TusUpload::forceCreate([
+            'request_id' => 'A',
+            'tus_id' => 'A',
+            'user_id' => 1,
+            'filename' => 'test.mp4',
+            'size' => 10,
+            'offset' => 10,
+            'mimetype' => 'video/mp4',
+            'upload_token' => 'AAAAAAAAAAAA',
+            'upload_token_expires_at' => \Carbon\Carbon::now()->addHour(),
+        ]);
+        $upload->completed = true;
+        $upload->save();
+        
+        $video = $repository->create('1', $upload->id, 'test.mp4', 'video/mp4');
+
+        $video_file = $video->path . '/'.$video->video_id.'.mp4';
+        
+        Storage::disk('local')->put($video_file, 'Test Content');
+
+        $deletedVideo = $repository->delete($video->video_id);
+
+        $this->assertInstanceOf(\App\Video::class, $deletedVideo);
+
+        $this->assertNull($repository->find($video->video_id));
+
+        Storage::disk('local')->assertMissing($video_file);
     }
 }

@@ -14,3 +14,7 @@ use Illuminate\Http\Request;
 */
 
 Route::middleware('guest')->post('video.add', 'Api\VideoController@store');
+
+Route::middleware('guest')->post('video.get', 'Api\VideoController@show');
+
+Route::middleware('guest')->post('video.delete', 'Api\VideoController@destroy');

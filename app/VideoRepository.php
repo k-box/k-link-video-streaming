@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
 use Illuminate\Contracts\Filesystem\Factory as Storage;
 use EndyJasmi\Cuid;
+use App\Exceptions\VideoNotFoundException;
 
 class VideoRepository
 {
@@ -97,6 +98,31 @@ class VideoRepository
 
         return $video->fresh();
     }
+
+    /**
+     * Delete a video by the given Video ID.
+     *
+     * @param  int  $video_id
+     * @return \App\Video|null
+     */
+     public function delete($video_id)
+     {
+         $video = $this->find($video_id);
+
+         if(is_null($video)){
+            throw new VideoNotFoundException();
+         }
+
+         if($video->upload){
+             $video->upload->delete();
+         }
+
+         $video->delete(); // also delete the upload entry in the queue, if exists
+
+         $this->storage->deleteDirectory($video->path);
+
+         return $video;
+     }
 
 
 }
