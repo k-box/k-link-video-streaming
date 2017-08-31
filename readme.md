@@ -29,6 +29,7 @@ Here is a brief table of contents:
 
 - The developer API is documented in [`docs/api.md`](./docs/api.md)
 - The [`docs/video-upload.md`](./docs/video-upload.md) file documents the action flow to upload a video file
+- [Running behind a (reverse) proxy](./docs/behind-proxy.md)
 
 
 ## Contributing

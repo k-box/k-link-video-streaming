@@ -168,6 +168,7 @@ return [
          */
         Laravel\Tinker\TinkerServiceProvider::class,
         Avvertix\TusUpload\Providers\TusUploadServiceProvider::class,
+        Fideloper\Proxy\TrustedProxyServiceProvider::class,
 
         /*
          * Application Service Providers...

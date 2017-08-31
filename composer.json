@@ -13,14 +13,15 @@
     "require": {
         "php": ">=5.6.4",
         "avvertix/laravel-tus-upload": "dev-master",
-        "endyjasmi/cuid": "^2.0",
+        "endyjasmi/cuid": "2.0.*",
+        "fideloper/proxy": "3.3.*",
         "laravel/framework": "5.4.*",
-        "laravel/tinker": "~1.0"
+        "laravel/tinker": "1.0.*"
     },
     "require-dev": {
-        "fzaninotto/faker": "~1.4",
+        "fzaninotto/faker": "1.7.*",
         "mockery/mockery": "0.9.*",
-        "phpunit/phpunit": "~5.7"
+        "phpunit/phpunit": "5.7.*"
     },
     "autoload": {
         "classmap": [

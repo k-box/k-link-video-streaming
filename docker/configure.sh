@@ -4,6 +4,7 @@ set -e
 APP_ENV=${APP_ENV:-production}
 APP_DATABASE_FILE="${INSTALL_DIRECTORY}/storage/app/database.sqlite"
 SETUP_WWWUSER=${SETUP_WWWUSER:-nginx}
+TRUSTED_PROXY_IP=${TRUSTED_PROXY_IP:-192.0.2.1/32}
 
 # TODO: abort startup if APP_URL is not configured
 # TODO: write in storage/app the APP_KEY and grab it
@@ -46,6 +47,7 @@ function write_config() {
 		APP_KEY=${APP_KEY}
 		APP_URL=${APP_URL}
         DB_DATABASE=${APP_DATABASE_FILE}
+		TRUSTED_PROXY_IP=${TRUSTED_PROXY_IP}
         TUSUPLOAD_USE_PROXY=true
         TUSUPLOAD_HOST=0.0.0.0
         TUSUPLOAD_HTTP_PATH=/video.uploads/
