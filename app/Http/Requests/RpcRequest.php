@@ -7,7 +7,7 @@ use Illuminate\Foundation\Http\FormRequest;
 /**
  * Base request for HTTP-RPC endpoints
  */
-class RpcRequest extends FormRequest
+abstract class RpcRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -16,7 +16,7 @@ class RpcRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return request()->user()->can('add-video');
     }
 
     /**

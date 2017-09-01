@@ -25,7 +25,7 @@ class VideoDeleteTest extends TestCase
         
         Storage::disk('local')->put($video_file, 'Test Content');
 
-        $this->actingAs((new \App\User())->forceFill(['id' => 1]));
+        $this->actingAsApplication(1);
 
         $response = $this->json('POST', '/api/video.delete', [
             'id' => 'sally',

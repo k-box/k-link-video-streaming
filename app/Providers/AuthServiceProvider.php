@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use App\KlinkRegistry\Registry;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -25,6 +26,16 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        Registry::auth();
+
+        Gate::define('add-video', function ($application, $video = null) {
+            return isset($application->permissions) ? $application->permissions->contains('data-add') : false;
+        });
+
+        Gate::define('delete-video', function ($application, $video) {
+            $hasPermission = isset($application->permissions) ? $application->permissions->contains('data-delete-own') : false;
+            return $hasPermission &&
+                   $application->id == $video->application_id;
+        });
     }
 }

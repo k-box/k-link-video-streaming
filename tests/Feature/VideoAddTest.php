@@ -15,7 +15,7 @@ class VideoAddTest extends TestCase
     {
 
         // Faking application authentication
-        $this->actingAs((new \App\User())->forceFill(['id' => 1]));
+        $this->actingAsApplication(1);
 
         $response = $this->json('POST', '/api/video.add', [
             'id' => 'sally',

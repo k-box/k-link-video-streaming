@@ -18,7 +18,7 @@ class VideoGetTest extends TestCase
         
         $video = $repository->create('1', '1', 'test.mp4', 'video/mp4');
 
-        $this->actingAs((new \App\User())->forceFill(['id' => 1]));
+        $this->actingAsApplication(1);
 
         $response = $this->json('POST', '/api/video.get', [
             'id' => 'sally',
@@ -52,7 +52,7 @@ class VideoGetTest extends TestCase
     public function test_video_not_found_exception_thrown()
     {
 
-        $this->actingAs((new \App\User())->forceFill(['id' => 1]));
+        $this->actingAsApplication(1);
 
         $response = $this->json('POST', '/api/video.get', [
             'id' => 'sally',
