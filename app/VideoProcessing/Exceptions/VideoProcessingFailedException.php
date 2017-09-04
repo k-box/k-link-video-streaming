@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Exceptions;
+namespace App\VideoProcessing\Exceptions;
 
 use Exception;
 
-class VideoNotFoundException extends Exception
+class VideoProcessingFailedException extends Exception
 {
 
     public function __construct($message = '')

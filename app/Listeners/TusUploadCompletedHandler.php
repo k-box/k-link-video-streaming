@@ -66,7 +66,7 @@ class TusUploadCompletedHandler
             
             $video->save();
 
-            $job = (new ConvertVideo($video))->onQueue('processing');
+            $job = (new ConvertVideo($video))->onQueue('video-processing');
             
             dispatch($job);
     

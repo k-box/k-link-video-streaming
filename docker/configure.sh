@@ -3,7 +3,7 @@ set -e
 
 APP_ENV=${APP_ENV:-production}
 APP_DATABASE_FILE="${INSTALL_DIRECTORY}/storage/app/database.sqlite"
-SETUP_WWWUSER=${SETUP_WWWUSER:-nginx}
+SETUP_WWWUSER=${SETUP_WWWUSER:-www-data}
 TRUSTED_PROXY_IP=${TRUSTED_PROXY_IP:-192.0.2.1/32}
 
 # TODO: abort startup if APP_URL is not configured
@@ -43,7 +43,7 @@ function write_config() {
 
 	cat > ${INSTALL_DIRECTORY}/.env <<-EOM &&
 		APP_ENV=${APP_ENV}
-		APP_DEBUG=false
+		APP_DEBUG=true
 		APP_KEY=${APP_KEY}
 		APP_URL=${APP_URL}
         DB_DATABASE=${APP_DATABASE_FILE}
@@ -65,6 +65,9 @@ function install_or_update() {
     fi
 
     php artisan migrate --force
+
+    chgrp -R $SETUP_WWWUSER $APP_DATABASE_FILE && \
+    chmod -R g+rw $APP_DATABASE_FILE
 }
 
 

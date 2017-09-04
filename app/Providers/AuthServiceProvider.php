@@ -29,11 +29,11 @@ class AuthServiceProvider extends ServiceProvider
         Registry::auth();
 
         Gate::define('add-video', function ($application, $video = null) {
-            return isset($application->permissions) ? $application->permissions->contains('data-add') : false;
+            return isset($application->permissions) ? collect($application->permissions)->contains('data-add') : false;
         });
 
         Gate::define('delete-video', function ($application, $video) {
-            $hasPermission = isset($application->permissions) ? $application->permissions->contains('data-delete-own') : false;
+            $hasPermission = isset($application->permissions) ? collect($application->permissions)->contains('data-delete-own') : false;
             return $hasPermission &&
                    $application->id == $video->application_id;
         });

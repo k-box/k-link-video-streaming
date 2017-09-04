@@ -6,3 +6,5 @@ server.php
 webpack.mix.js
 node_modules
 storage
+bin/bin
+bin/video-processing*

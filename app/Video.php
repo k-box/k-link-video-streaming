@@ -301,31 +301,30 @@ class Video extends Model
       public function getStatusAttribute($value = null)
       {
 
-        $this->attributes['status'] = self::STATUS_PENDING;
+        $status = self::STATUS_PENDING;
         
         if($this->upload){
 
             if($this->upload->started)
-              $this->attributes['status'] = self::STATUS_UPLOADING;
+              $status = self::STATUS_UPLOADING;
   
             if($this->upload->cancelled)
-              $this->attributes['status'] = self::STATUS_CANCELLED;
+              $status = self::STATUS_CANCELLED;
         }
 
           if($this->completed)
-            $this->attributes['status'] = self::STATUS_COMPLETED;
+            $status = self::STATUS_COMPLETED;
 
           if($this->cancelled)
-            $this->attributes['status'] = self::STATUS_CANCELLED;
+            $status = self::STATUS_CANCELLED;
           
           if($this->failed)
-            $this->attributes['status'] = self::STATUS_FAILED;
+            $status = self::STATUS_FAILED;
           
           if($this->queued)
-            $this->attributes['status'] = self::STATUS_QUEUED;
+            $status = self::STATUS_QUEUED;
         
-
-          return $this->attributes['status'];
+          return $status;
       }
 
     /**

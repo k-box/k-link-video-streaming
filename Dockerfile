@@ -1,3 +1,5 @@
+FROM docker.klink.asia/alessio.vertemati/video-processing-cli:latest
+
 FROM php:7.0.21-fpm
 
 ### NGINX version, mainline for debian:jessie as the base image is based on debian:jessie
@@ -67,6 +69,8 @@ RUN chmod +x /usr/local/bin/configure.sh && \
 
 ## Copy the application code
 COPY . $INSTALL_DIRECTORY 
+
+COPY --from=0 /video-processing-cli/ "${INSTALL_DIRECTORY}/bin/"
 
 ENV STORAGE_PATH "${INSTALL_DIRECTORY}/storage"
 
