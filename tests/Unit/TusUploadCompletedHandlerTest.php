@@ -10,6 +10,7 @@ use Avvertix\TusUpload\TusUpload;
 use Avvertix\TusUpload\Events\TusUploadCompleted;
 use App\Listeners\TusUploadCompletedHandler;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Queue;
 use App\Jobs\ConvertVideo;
 
@@ -60,7 +61,7 @@ class TusUploadCompletedHandlerTest extends TestCase
 
     public function test_video_processing_is_queued_and_file_is_available()
     {
-        // Queue::fake();
+        Storage::fake('local');
 
         $request_id = 'REQUEST';
 
@@ -81,11 +82,6 @@ class TusUploadCompletedHandlerTest extends TestCase
 
         $this->assertNotNull($videoFile);
         $this->assertTrue($videoFile->isFile());
-
-        // Queue::assertPushed(ConvertVideo::class, function ($job) use ($video) {
-        //     return $job->video->video_id === $video->id;
-        // });
         
-        // Queue::assertPushedOn('processing', ConvertVideo::class);
     }
 }

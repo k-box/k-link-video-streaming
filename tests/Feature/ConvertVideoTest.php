@@ -18,16 +18,14 @@ class ConvertVideoTest extends TestCase
 
     public function test_video_is_converted_and_mdp_file_is_generated()
     {
+        Storage::fake('local');
+
         $this->app->instance(VideoProcessorFactory::class, $factory = new FakeVideoProcessorFactory);
 
         // generate a video
         $repository = app(VideoRepository::class);
         
         $video = $repository->create('1', '1', '20170813.mp4', 'video/mp4');
-    
-        // fake the storage and insert some video data
-
-        Storage::fake('local');
     
         $video_file = $video->path . $video->video_id.'.mp4';
         $expected_mdp_file = $video->path . $video->video_id.'.mdp';
@@ -51,16 +49,14 @@ class ConvertVideoTest extends TestCase
 
     public function test_video_thumbnail_is_generated()
     {
+        Storage::fake('local');
+
         $this->app->instance(VideoProcessorFactory::class, $factory = new FakeVideoProcessorFactory);
 
         // generate a video
         $repository = app(VideoRepository::class);
         
         $video = $repository->create('1', '1', '20170813.mp4', 'video/mp4');
-    
-        // fake the storage and insert some video data
-
-        Storage::fake('local');
     
         $video_file = $video->path . $video->video_id.'.mp4';
         $expected_thumbnail_file = $video->path . $video->video_id.'.jpg';
@@ -84,14 +80,12 @@ class ConvertVideoTest extends TestCase
     
     public function test_video_conversion_error_is_handled()
     {
+        Storage::fake('local');
+
         // generate a video
         $repository = app(VideoRepository::class);
         
         $video = $repository->create('1', '1', 'test.mp4', 'video/mp4');
-    
-        // fake the storage and insert some video data
-
-        Storage::fake('local');
     
         $video_file = $video->path . '/'.$video->video_id.'11.mp4';
         $expected_mdp_file = $video->path . '/'.$video->video_id.'.mdp';
@@ -113,30 +107,4 @@ class ConvertVideoTest extends TestCase
         $this->assertEquals(Video::STATUS_FAILED, $video->status);
         $this->assertNotEmpty($video->fail_reason);
     }
-
-
-    // public function test_real_conversion()
-    // {
-    //     $this->app->instance(VideoProcessorFactory::class, $factory = new FakeVideoProcessorFactory);
-        
-    //     // generate a video
-    //     $repository = app(VideoRepository::class);
-        
-    //     $video = $repository->create('1', '1', '20170813.mp4', 'video/mp4');
-    
-    //     // fake the storage and insert some video data
-    
-    //     $video_file = $video->path . $video->video_id.'.mp4';
-    //     $expected_mdp_file = $video->path . $video->video_id.'.mdp';
-        
-    //     Storage::disk('local')->put($video_file, 'Test Content');
-
-    //     // start the ConvertVideo job
-
-    //     $job = (new ConvertVideo($video))->onQueue('video-processing');
-        
-    //     dispatch($job);
-
-    //     $video = $video->fresh();
-    // }
 }

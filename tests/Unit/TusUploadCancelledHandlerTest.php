@@ -9,6 +9,7 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 use App\Video;
 use App\VideoRepository;
 use Avvertix\TusUpload\TusUpload;
+use Illuminate\Support\Facades\Storage;
 use Avvertix\TusUpload\Events\TusUploadCancelled;
 use App\Listeners\TusUploadCancelledHandler;
 use Carbon\Carbon;
@@ -60,6 +61,8 @@ class TusUploadCancelledHandlerTest extends TestCase
 
     public function test_video_is_marked_as_cancelled()
     {
+        Storage::fake('local');
+        
         $request_id = 'REQUEST';
 
         $cancelled_event = $this->createEvent(1, $request_id);

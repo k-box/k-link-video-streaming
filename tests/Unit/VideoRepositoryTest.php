@@ -16,6 +16,8 @@ class VideoRepositoryTest extends TestCase
     
     public function test_video_is_created()
     {
+        Storage::fake('local');
+        
         $repository = app(VideoRepository::class);
 
         $video = $repository->create(1, 1, 'test.mp4', 'video/mp4');
@@ -36,6 +38,8 @@ class VideoRepositoryTest extends TestCase
     
     public function test_video_is_retrieved_by_video_id()
     {
+        Storage::fake('local');
+
         $repository = app(VideoRepository::class);
 
         $video = $repository->create('1', '1', 'test.mp4', 'video/mp4');

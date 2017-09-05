@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
@@ -13,6 +14,7 @@ class VideoAddTest extends TestCase
 
     public function test_video_add_request_is_processed()
     {
+        Storage::fake('local');
 
         // Faking application authentication
         $this->actingAsApplication(1);

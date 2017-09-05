@@ -7,6 +7,7 @@ use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use App\VideoRepository;
+use Illuminate\Support\Facades\Storage;
 
 class VideoGetTest extends TestCase
 {
@@ -14,6 +15,8 @@ class VideoGetTest extends TestCase
 
     public function test_video_is_retrieved_in_json_form()
     {
+        Storage::fake('local');
+
         $repository = app(VideoRepository::class);
         
         $video = $repository->create('1', '1', 'test.mp4', 'video/mp4');
@@ -51,7 +54,8 @@ class VideoGetTest extends TestCase
 
     public function test_video_not_found_exception_thrown()
     {
-
+        Storage::fake('local');
+        
         $this->actingAsApplication(1);
 
         $response = $this->json('POST', '/api/video.get', [
