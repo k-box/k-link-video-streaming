@@ -15,7 +15,7 @@ class VideoGetTest extends TestCase
 
     public function test_video_is_retrieved_in_json_form()
     {
-        Storage::fake('local');
+        Storage::fake('videos');
 
         $repository = app(VideoRepository::class);
         
@@ -54,8 +54,8 @@ class VideoGetTest extends TestCase
 
     public function test_video_not_found_exception_thrown()
     {
-        Storage::fake('local');
-        
+        Storage::fake('videos');
+
         $this->actingAsApplication(1);
 
         $response = $this->json('POST', '/api/video.get', [

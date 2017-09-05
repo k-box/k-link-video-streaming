@@ -15,7 +15,7 @@ class VideoDeleteTest extends TestCase
 
     public function test_video_is_deleted()
     {
-        Storage::fake('local');
+        Storage::fake('videos');
         
         $repository = app(VideoRepository::class);
         
@@ -23,7 +23,7 @@ class VideoDeleteTest extends TestCase
 
         $video_file = $video->path . '/'.$video->video_id.'.mp4';
         
-        Storage::disk('local')->put($video_file, 'Test Content');
+        Storage::disk('videos')->put($video_file, 'Test Content');
 
         $this->actingAsApplication(1);
 
@@ -54,7 +54,7 @@ class VideoDeleteTest extends TestCase
                 ]
             ]);
         
-        Storage::disk('local')->assertMissing($video_file);
+        Storage::disk('videos')->assertMissing($video_file);
     }
 
 

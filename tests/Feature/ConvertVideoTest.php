@@ -18,7 +18,7 @@ class ConvertVideoTest extends TestCase
 
     public function test_video_is_converted_and_mdp_file_is_generated()
     {
-        Storage::fake('local');
+        Storage::fake('videos');
 
         $this->app->instance(VideoProcessorFactory::class, $factory = new FakeVideoProcessorFactory);
 
@@ -30,7 +30,7 @@ class ConvertVideoTest extends TestCase
         $video_file = $video->path . $video->video_id.'.mp4';
         $expected_mdp_file = $video->path . $video->video_id.'.mdp';
         
-        Storage::disk('local')->put($video_file, 'Test Content');
+        Storage::disk('videos')->put($video_file, 'Test Content');
 
         // start the ConvertVideo job
 
@@ -41,7 +41,7 @@ class ConvertVideoTest extends TestCase
         $video = $video->fresh();
 
         // make sure in the storage there is the mdp file
-        Storage::disk('local')->assertExists($expected_mdp_file);
+        Storage::disk('videos')->assertExists($expected_mdp_file);
         
         // make sure video status is set to COMPLETED
         $this->assertEquals(Video::STATUS_COMPLETED, $video->status);
@@ -49,7 +49,7 @@ class ConvertVideoTest extends TestCase
 
     public function test_video_thumbnail_is_generated()
     {
-        Storage::fake('local');
+        Storage::fake('videos');
 
         $this->app->instance(VideoProcessorFactory::class, $factory = new FakeVideoProcessorFactory);
 
@@ -61,7 +61,7 @@ class ConvertVideoTest extends TestCase
         $video_file = $video->path . $video->video_id.'.mp4';
         $expected_thumbnail_file = $video->path . $video->video_id.'.jpg';
         
-        Storage::disk('local')->put($video_file, 'Test Content');
+        Storage::disk('videos')->put($video_file, 'Test Content');
 
         // start the ConvertVideo job
 
@@ -72,7 +72,7 @@ class ConvertVideoTest extends TestCase
         $video = $video->fresh();
 
         // make sure in the storage there is the mdp file
-        Storage::disk('local')->assertExists($expected_thumbnail_file);
+        Storage::disk('videos')->assertExists($expected_thumbnail_file);
         
         // make sure video status is set to COMPLETED
         $this->assertEquals(Video::STATUS_COMPLETED, $video->status);
@@ -80,7 +80,7 @@ class ConvertVideoTest extends TestCase
     
     public function test_video_conversion_error_is_handled()
     {
-        Storage::fake('local');
+        Storage::fake('videos');
 
         // generate a video
         $repository = app(VideoRepository::class);
@@ -90,7 +90,7 @@ class ConvertVideoTest extends TestCase
         $video_file = $video->path . '/'.$video->video_id.'11.mp4';
         $expected_mdp_file = $video->path . '/'.$video->video_id.'.mdp';
         
-        Storage::disk('local')->put($video_file, 'Test Content');
+        Storage::disk('videos')->put($video_file, 'Test Content');
 
         // start the ConvertVideo job
 
@@ -101,7 +101,7 @@ class ConvertVideoTest extends TestCase
         $video = $video->fresh();
 
         // make sure in the storage there is the mdp file
-        Storage::disk('local')->assertMissing($expected_mdp_file);
+        Storage::disk('videos')->assertMissing($expected_mdp_file);
         
         // make sure video status is set to COMPLETED
         $this->assertEquals(Video::STATUS_FAILED, $video->status);

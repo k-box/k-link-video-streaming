@@ -30,7 +30,7 @@ class TusUploadCompletedHandler
     public function __construct(Storage $storage, VideoRepository $repository)
     {
         $this->videos = $repository;
-        $this->storage = $storage->disk('local');
+        $this->storage = $storage->disk('videos');
     }
 
     /**

@@ -27,6 +27,9 @@ use Illuminate\Support\Facades\Storage;
  * @property boolean $cancelled indicates if the video processing has been cancelled
  * @property string $fail_reason The reason of the processing failure
  * @property-read string $status The status of the video @see STATUS_PENDING, STATUS_UPLOADING, STATUS_PROCESSING, STATUS_COMPLETED, STATUS_CANCELLED, STATUS_FAILED
+ * @property-read string $url The URL of the video playback page
+ * @property-read string|null $poster The URL of the poster image, if video processing is complete, null otherwise
+ * @property-read string|null $dash_stream The URL of the DASH MPD manifest, if video processing is complete, null otherwise
  */
 class Video extends Model
 {
@@ -120,7 +123,12 @@ class Video extends Model
      *
      * @var array
      */
-     protected $appends = ['status'];
+    protected $appends = [
+         'status',
+         'poster',
+         'dash_stream',
+         'url',
+    ];
 
     /**
      * Set the completed attribute
@@ -346,7 +354,7 @@ class Video extends Model
       public function getFileAttribute($value = null)
       {
 
-        $absolutePath = Storage::disk('local')->path($this->path . '/' . $this->video_id . '.mp4');
+        $absolutePath = Storage::disk('videos')->path($this->path . '/' . $this->video_id . '.mp4');
 
         // todo: check if Laravel has a File instance that can be used to wrap this file
 
@@ -360,4 +368,46 @@ class Video extends Model
      {
          return $this->file;
      }
+
+
+     /**
+      * Get the video poster image.
+      *
+      * @param  mixed  $value not taken into account
+      * @return string the URL of the poster image
+      */
+      public function getPosterAttribute($value = null)
+      {
+            if($this->completed){
+                return url("videos/$this->video_id/$this->video_id.jpg");
+            }
+
+            return null;
+      }
+
+     /**
+      * Get the video DASH manifest URL.
+      *
+      * @param  mixed  $value not taken into account
+      * @return string the URL of the DASH manifest for streaming
+      */
+      public function getDashStreamAttribute($value = null)
+      {
+            if($this->completed){
+                return url("videos/$this->video_id/$this->video_id.mpd");
+            }
+
+            return null;
+      }
+
+     /**
+      * Get the video URL.
+      *
+      * @param  mixed  $value not taken into account
+      * @return string the URL of video playback page
+      */
+      public function getUrlAttribute($value = null)
+      {
+            return route('video.show', $this->video_id);
+      }
 }

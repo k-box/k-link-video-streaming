@@ -16,8 +16,8 @@ class VideoRepositoryTest extends TestCase
     
     public function test_video_is_created()
     {
-        Storage::fake('local');
-        
+        Storage::fake('videos');
+
         $repository = app(VideoRepository::class);
 
         $video = $repository->create(1, 1, 'test.mp4', 'video/mp4');
@@ -33,12 +33,12 @@ class VideoRepositoryTest extends TestCase
         $this->assertEquals($video->original_video_filename, 'test.mp4');
         $this->assertEquals($video->original_video_mimetype, 'video/mp4');
 
-        $this->assertTrue(Storage::disk('local')->exists($video->path));
+        $this->assertTrue(Storage::disk('videos')->exists($video->path));
     }
     
     public function test_video_is_retrieved_by_video_id()
     {
-        Storage::fake('local');
+        Storage::fake('videos');
 
         $repository = app(VideoRepository::class);
 
@@ -52,7 +52,7 @@ class VideoRepositoryTest extends TestCase
 
     public function test_video_is_deleted()
     {
-        Storage::fake('local');
+        Storage::fake('videos');
 
         $repository = app(VideoRepository::class);
         
@@ -60,7 +60,7 @@ class VideoRepositoryTest extends TestCase
 
         $video_file = $video->path . '/'.$video->video_id.'.mp4';
         
-        Storage::disk('local')->put($video_file, 'Test Content');
+        Storage::disk('videos')->put($video_file, 'Test Content');
 
         $deletedVideo = $repository->delete($video->video_id);
 
@@ -68,13 +68,13 @@ class VideoRepositoryTest extends TestCase
 
         $this->assertNull($repository->find($video->video_id));
 
-        Storage::disk('local')->assertMissing($video_file);
+        Storage::disk('videos')->assertMissing($video_file);
 
     }
     
     public function test_video_and_tusupload_are_deleted()
     {
-        Storage::fake('local');
+        Storage::fake('videos');
         
         $repository = app(VideoRepository::class);
 
@@ -96,7 +96,7 @@ class VideoRepositoryTest extends TestCase
 
         $video_file = $video->path . '/'.$video->video_id.'.mp4';
         
-        Storage::disk('local')->put($video_file, 'Test Content');
+        Storage::disk('videos')->put($video_file, 'Test Content');
 
         $deletedVideo = $repository->delete($video->video_id);
 
@@ -104,6 +104,6 @@ class VideoRepositoryTest extends TestCase
 
         $this->assertNull($repository->find($video->video_id));
 
-        Storage::disk('local')->assertMissing($video_file);
+        Storage::disk('videos')->assertMissing($video_file);
     }
 }

@@ -44,7 +44,7 @@ class FakeVideoProcessor implements VideoProcessorContract
     public function thumbnail($file, $options = []) {
         $video_id = basename(dirname($file));
         
-        Storage::disk('local')->put('./' . $video_id . '/' . $video_id . '.jpg', 'Example JPG file');
+        Storage::disk('videos')->put('./' . $video_id . '/' . $video_id . '.jpg', 'Example JPG file');
     }
 
     /**
@@ -57,7 +57,7 @@ class FakeVideoProcessor implements VideoProcessorContract
     public function streamify($file, $options = []) {
         $video_id = basename(dirname($file));
 
-        Storage::disk('local')->put('./' . $video_id . '/' . $video_id . '.mdp', 'Example MDP file');
+        Storage::disk('videos')->put('./' . $video_id . '/' . $video_id . '.mdp', 'Example MDP file');
     }
 
     

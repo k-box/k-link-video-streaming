@@ -85,6 +85,9 @@ A json object with the following properites is returned
 - `video_id`: the unique identifier of the video
 - `status`: the status of the video, see [Video Status](./video-status.md) for a complete list of the possible values
 - `created_at`: when the video was added to the streaming service
+- `url`: the URL of the public playback page (where the video player is presented)
+- `poster`: the URL of the poster image
+- `dash_stream`: the URL where the DASH manifest is accessible
 
 > The return object is not complete, expect changes before the first release
 

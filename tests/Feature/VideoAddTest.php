@@ -14,7 +14,7 @@ class VideoAddTest extends TestCase
 
     public function test_video_add_request_is_processed()
     {
-        Storage::fake('local');
+        Storage::fake('videos');
 
         // Faking application authentication
         $this->actingAsApplication(1);

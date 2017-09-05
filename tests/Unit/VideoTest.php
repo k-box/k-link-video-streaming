@@ -27,6 +27,9 @@ class VideoTest extends TestCase
         $this->assertTrue($video->completed);
         $this->assertTrue($video->completed());
         $this->assertNotNull($video->completed_at);
+        $this->assertNotNull($video->poster);
+        $this->assertNotNull($video->url);
+        $this->assertNotNull($video->dash_stream);
         $this->assertEquals(Video::STATUS_COMPLETED, $video->status);
     }
 
@@ -44,6 +47,9 @@ class VideoTest extends TestCase
         $this->assertTrue($video->cancelled);
         $this->assertTrue($video->cancelled());
         $this->assertNotNull($video->cancelled_at);
+        $this->assertNull($video->poster);
+        $this->assertNull($video->dash_stream);
+        $this->assertNotNull($video->url);
         $this->assertEquals(Video::STATUS_CANCELLED, $video->status);
     }
 
@@ -61,6 +67,9 @@ class VideoTest extends TestCase
         $this->assertTrue($video->failed);
         $this->assertTrue($video->failed());
         $this->assertNotNull($video->failed_at);
+        $this->assertNull($video->poster);
+        $this->assertNull($video->dash_stream);
+        $this->assertNotNull($video->url);
         $this->assertEquals(Video::STATUS_FAILED, $video->status);
     }
 
@@ -78,6 +87,9 @@ class VideoTest extends TestCase
         $this->assertTrue($video->queued);
         $this->assertTrue($video->queued());
         $this->assertNotNull($video->queued_at);
+        $this->assertNull($video->poster);
+        $this->assertNull($video->dash_stream);
+        $this->assertNotNull($video->url);
         $this->assertEquals(Video::STATUS_QUEUED, $video->status);
     }
 
@@ -86,6 +98,9 @@ class VideoTest extends TestCase
         $video = (new Video())->forceFill(['id' => 1, 'video_id' => 'aaa']);
 
         $this->assertEquals(Video::STATUS_PENDING, $video->status);
+        $this->assertNull($video->poster);
+        $this->assertNull($video->dash_stream);
+        $this->assertNotNull($video->url);
     }
 
     public function test_video_has_uploading_status()

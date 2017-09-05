@@ -61,7 +61,7 @@ class TusUploadCompletedHandlerTest extends TestCase
 
     public function test_video_processing_is_queued_and_file_is_available()
     {
-        Storage::fake('local');
+        Storage::fake('videos');
 
         $request_id = 'REQUEST';
 
@@ -82,6 +82,6 @@ class TusUploadCompletedHandlerTest extends TestCase
 
         $this->assertNotNull($videoFile);
         $this->assertTrue($videoFile->isFile());
-        
+
     }
 }

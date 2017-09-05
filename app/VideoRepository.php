@@ -21,7 +21,7 @@ class VideoRepository
 
     public function __construct(Storage $storage)
     {
-        $this->storage = $storage->disk('local');
+        $this->storage = $storage->disk('videos');
     }
 
     /**

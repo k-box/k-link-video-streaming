@@ -1,22 +1,68 @@
 
 /**
- * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
+ * Application javascript.
  */
 
-require('./bootstrap');
+const shaka = require('shaka-player');
+const plyr = require('plyr');
 
-window.Vue = require('vue');
+
+function initPlayer(video) {
+    // Create a Player instance.
+    var manifestUri = video.dataset.dash.trim();
+
+    var player = new shaka.Player(video);
+
+    // Listen for error events.
+    player.addEventListener('error', onErrorEvent);
+
+    // Try to load a manifest.
+    // This is an asynchronous process.
+    player.load(manifestUri).then(function () {
+        // This runs if the asynchronous load is successful.
+        console.log('The video has now been loaded!');
+    }).catch(onError);  // onError is executed if the asynchronous load fails.
+}
+
+function onErrorEvent(event) {
+    // Extract the shaka.util.Error object from the event.
+    onError(event.detail);
+}
+
+function onError(error) {
+    // Log the error.
+    console.error('Error code', error.code, 'object', error);
+}
 
 /**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
+ * 
+ * @param {string} selector the DOM selector to get the video tag, or the DOMElement
+ * @param {*} options player configuration options
+ * @return {Plyr} the player instance
  */
+function _StreamPlayer(selector, options){
 
-Vue.component('example', require('./components/Example.vue'));
+    options = options || {};
 
-const app = new Vue({
-    el: '#app'
-});
+    selector = typeof selector === 'string' ? document.querySelector(selector) : selector;
+
+    
+
+    var player = plyr.setup(selector);
+    shaka.polyfill.installAll();
+    
+    // Check to see if the browser supports the basic APIs Shaka needs.
+    // This is an asynchronous check.
+    if (shaka.Player.isBrowserSupported()) {
+        // Everything looks good!
+        initPlayer(selector);
+    } else {
+        // This browser does not have the minimum set of APIs we need.
+        console.error('Browser not supported!');
+    }
+
+    return player;
+}
+
+window.StreamPlayer = _StreamPlayer;
+

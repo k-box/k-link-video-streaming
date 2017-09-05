@@ -61,8 +61,8 @@ class TusUploadCancelledHandlerTest extends TestCase
 
     public function test_video_is_marked_as_cancelled()
     {
-        Storage::fake('local');
-        
+        Storage::fake('videos');
+
         $request_id = 'REQUEST';
 
         $cancelled_event = $this->createEvent(1, $request_id);
