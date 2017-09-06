@@ -1,0 +1,53 @@
+## Continuous Integration Jobs definition
+
+stages:
+  - test
+  - build
+  - release
+
+cache:
+  key: "video-streaming-service"
+  paths:
+  - .composer-cache/
+
+
+unit_test:
+  stage: test
+  image: "docker.klink.asia/open/docker-php:7.0-alpine"
+  script:
+    - export COMPOSER_CACHE_DIR=`pwd`/.composer-cache
+    - cp .env.example .env
+    - composer install --prefer-dist
+    - php artisan key:generate
+    - php artisan config:clear
+    - vendor/bin/phpunit --exclude-group cli-required
+  tags:
+    - docker
+  artifacts:
+    expire_in: 1 week
+    paths:
+    - storage/logs/
+
+image_prepare:
+  stage: build
+  image: "docker.klink.asia/open/docker-php:7.0-alpine"
+  script:
+    - export COMPOSER_CACHE_DIR=`pwd`/.composer-cache
+    - composer install --prefer-dist --no-dev
+    - php artisan config:clear
+  tags:
+    - docker
+  artifacts:
+    expire_in: 1 week
+    paths:
+    - vendor/
+
+image_build:
+  stage: release
+  tags:
+    - shell
+    - deploy
+  script:
+    - docker build -t $CI_REGISTRY_IMAGE:${CI_BUILD_REF_NAME/v/} .
+    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
+    - docker push $CI_REGISTRY_IMAGE:${CI_BUILD_REF_NAME/v/}

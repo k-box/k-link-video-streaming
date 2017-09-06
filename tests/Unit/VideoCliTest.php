@@ -8,6 +8,9 @@ use App\VideoProcessing\Drivers\VideoCliOptions;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
+/**
+ * @group cli-required
+ */
 class VideoCliTest extends TestCase
 {
     public function test_video_cli_runs_command()
