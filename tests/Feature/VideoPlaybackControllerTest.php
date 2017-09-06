@@ -27,7 +27,7 @@ class VideoPlaybackControllerTest extends TestCase
 
         $this->actingAsApplication(1);
 
-        $response = $this->get('/v/' . $video->video_id);
+        $response = $this->get('/play/' . $video->video_id);
         
         $response->assertViewIs('video');
         $response->assertViewHas('video');
@@ -45,7 +45,7 @@ class VideoPlaybackControllerTest extends TestCase
 
         $this->actingAsApplication(1);
 
-        $response = $this->get('/v/' . $video->video_id);
+        $response = $this->get('/play/' . $video->video_id);
         
         $response->assertViewIs('video');
         $response->assertViewHas('video');

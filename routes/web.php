@@ -13,4 +13,4 @@
 
 Route::get('/', 'WelcomeController@index');
 
-Route::get('/v/{id}', 'VideoPlaybackController@show')->name('video.show');
+Route::get('/play/{id}', 'VideoPlaybackController@show')->name('video.show');

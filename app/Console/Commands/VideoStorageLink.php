@@ -27,14 +27,14 @@ class VideoStorageLink extends Command
      */
     public function handle()
     {
-        if (file_exists(public_path('videos'))) {
-            return $this->error('The "public/videos" directory already exists.');
+        if (file_exists(public_path('storage'))) {
+            return $this->error('The "public/storage" directory already exists.');
         }
 
         $this->laravel->make('files')->link(
-            storage_path('app/videos'), public_path('videos')
+            storage_path('app/videos'), public_path('storage')
         );
 
-        $this->info('The [public/videos] directory has been linked.');
+        $this->info('The [public/storage] directory has been linked.');
     }
 }

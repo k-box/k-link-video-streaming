@@ -379,7 +379,7 @@ class Video extends Model
       public function getPosterAttribute($value = null)
       {
             if($this->completed){
-                return url("videos/$this->video_id/$this->video_id.jpg");
+                return Storage::disk('videos')->url("$this->video_id/$this->video_id.jpg");
             }
 
             return null;
@@ -394,7 +394,7 @@ class Video extends Model
       public function getDashStreamAttribute($value = null)
       {
             if($this->completed){
-                return url("videos/$this->video_id/$this->video_id.mpd");
+                return Storage::disk('videos')->url("$this->video_id/$this->video_id.mpd");
             }
 
             return null;
