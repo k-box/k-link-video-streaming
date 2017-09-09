@@ -104,9 +104,8 @@ Delete a previously added video.
 The data about the original video are returned. 
 
 - `video_id`: the unique identifier of the video
-- `status`: the status of the video, see [Video Status](./video-status.md) for a complete list of the possible values
+- `status`: `deleted` to indicate that the request was completed succesfully
 - `created_at`: when the video was added to the streaming service
-- `deleted`: a boolean that indicate if the deletion was completed,
 
 > The return object is not complete, expect changes before the first release
 

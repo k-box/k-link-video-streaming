@@ -42,7 +42,7 @@ class VideoDeleteTest extends TestCase
             ->assertJson([
                 "response" => [
                     'video_id' => $video->video_id,
-                    'deleted' => true,
+                    'status' => 'deleted',
                 ]
             ])
             ->assertJsonStructure([

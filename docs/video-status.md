@@ -18,3 +18,5 @@ A video can enter the _cancelled_ state if the upload is cancelled (e.g. by the 
 The _failed_ state can be reached if the upload failed or if the video processing failed. 
 
 In any other cases, at the end of the processing, the video will be in the _completed_ state.
+
+When a video is deleted its status, in the returned response, will always be _deleted_.

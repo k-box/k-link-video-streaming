@@ -16,6 +16,7 @@ class VideoTest extends TestCase
     public function test_video_completed_attribute_set()
     {
         $video = (new Video())->forceFill(['id' => 1, 'video_id' => 'aaa']);
+        $video->exists = true; // to simulate that has been written on the database
 
         $this->assertFalse($video->completed);
         $this->assertFalse($video->completed());
@@ -36,6 +37,7 @@ class VideoTest extends TestCase
     public function test_video_cancelled_attribute_set()
     {
         $video = (new Video())->forceFill(['id' => 1, 'video_id' => 'aaa']);
+        $video->exists = true; // to simulate that has been written on the database
         
         $this->assertFalse($video->cancelled);
         $this->assertFalse($video->cancelled());
@@ -56,6 +58,7 @@ class VideoTest extends TestCase
     public function test_video_failed_at_attribute_set()
     {
         $video = (new Video())->forceFill(['id' => 1, 'video_id' => 'aaa']);
+        $video->exists = true; // to simulate that has been written on the database
         
         $this->assertFalse($video->failed);
         $this->assertFalse($video->failed());
@@ -76,6 +79,7 @@ class VideoTest extends TestCase
     public function test_video_queued_at_attribute_set()
     {
         $video = (new Video())->forceFill(['id' => 1, 'video_id' => 'aaa']);
+        $video->exists = true; // to simulate that has been written on the database
         
         $this->assertFalse($video->queued);
         $this->assertFalse($video->queued());
@@ -96,6 +100,7 @@ class VideoTest extends TestCase
     public function test_video_has_pending_status()
     {
         $video = (new Video())->forceFill(['id' => 1, 'video_id' => 'aaa']);
+        $video->exists = true; // to simulate that has been written on the database
 
         $this->assertEquals(Video::STATUS_PENDING, $video->status);
         $this->assertNull($video->poster);
@@ -128,6 +133,7 @@ class VideoTest extends TestCase
             'upload_id' => $upload->id, 
             'video_id' => 'aaa'
         ]);
+        $video->exists = true; // to simulate that has been written on the database
 
         $this->assertEquals(Video::STATUS_UPLOADING, $video->status);
     }

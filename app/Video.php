@@ -84,6 +84,13 @@ class Video extends Model
      */
     const STATUS_FAILED = 'failed';
 
+    /**
+     * The video file has been deleted.
+     *
+     * @var string
+     */
+    const STATUS_DELETED = 'deleted';
+
 
     /**
      * The attributes that should be mutated to dates.
@@ -331,6 +338,9 @@ class Video extends Model
           
           if($this->queued)
             $status = self::STATUS_QUEUED;
+
+          if(!$this->exists && !$this->wasRecentlyCreated)
+            $status = self::STATUS_DELETED;
         
           return $status;
       }
