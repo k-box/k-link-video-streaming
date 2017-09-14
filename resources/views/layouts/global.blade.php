@@ -8,7 +8,7 @@
         <title>{{ config('app.name') }}</title>
 
         <!-- Styles -->
-        <link rel="stylesheet" href="{{ mix('css/app.css') }}" preload>
+        <link rel="stylesheet" href="{{ url((string)mix('css/app.css')) }}" preload>
     </head>
     <body>
         @yield('content')

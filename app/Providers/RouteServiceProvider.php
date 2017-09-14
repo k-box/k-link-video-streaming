@@ -23,7 +23,15 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        if(app()->environment('production')){
+            // Forcing the root URL to be as configured
+            // This is currently required in production as the application 
+            // might be proxied under an alias, but globally configured 
+            // to run in the root. The current Docker deployment requires 
+            // this if proxies under a location that is not the root, 
+            // like "/video"
+            url()->forceRootUrl(config('app.url'));
+        }
 
         parent::boot();
     }
