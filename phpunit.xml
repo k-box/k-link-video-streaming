@@ -28,5 +28,6 @@
         <env name="SESSION_DRIVER" value="array"/>
         <env name="QUEUE_DRIVER" value="sync"/>
         <env name="DB_DATABASE" value=":memory:"/>
+        <env name="KLINK_REGISTRY_URL" value="http://localhost:8080/registry/"/>
     </php>
 </phpunit>

@@ -72,7 +72,7 @@ return [
 
         'kregistry' => [
             'driver' => 'kregistry',
-            'url' => env('REGISTRY_URL', 'https://test.klink.asia/registry/'),
+            'url' => env('KLINK_REGISTRY_URL', null),
         ],
     ],
 

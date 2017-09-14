@@ -72,7 +72,7 @@ class KlinkRegistryUserProvider implements UserProvider
         return $this->client->retrieveApplication(
             $credentials['api_token'],
             $credentials['api_calling_url'],
-            ['data-add', 'data-delete-own']
+            ['data-add', 'data-remove-own']
         );
     }
      

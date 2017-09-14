@@ -2,6 +2,15 @@
 
 ## Local Development
 
+### K-Link Registry
+
+While developing locally, i.e. when `APP_ENV` is set to `local`, the K-Link Registry connection is not necessary. 
+
+If you want to perform integration testing while in a `local` environment, the variable `KLINK_REGISTRY_URL` can be added to the `.env` file.
+
+In production, or when running the Docker image, the `KLINK_REGISTRY_URL` environment variable is mandatory.
+
+
 ### Common Problems
 
 #### How I can upload a video file?

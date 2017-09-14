@@ -6,7 +6,6 @@ APP_DATABASE_FILE="${INSTALL_DIRECTORY}/storage/app/database.sqlite"
 SETUP_WWWUSER=${SETUP_WWWUSER:-www-data}
 TRUSTED_PROXY_IP=${TRUSTED_PROXY_IP:-192.0.2.1/32}
 
-# TODO: abort startup if APP_URL is not configured
 # TODO: write in storage/app the APP_KEY and grab it
 
 function startup_config () {
@@ -41,9 +40,19 @@ function startup_config () {
 function write_config() {
     echo "- Writing env file..."
 
+    if [[ -z "$APP_URL" ]]; then
+        echo "ERROR. Required APP_URL environment variable is missing. Aborting the startup."
+        exit 1
+    fi
+
+    if [[ -z "$KLINK_REGISTRY_URL" ]]; then
+        echo "ERROR. Required KLINK_REGISTRY_URL environment variable is missing. Aborting the startup."
+        exit 1
+    fi
+
 	cat > ${INSTALL_DIRECTORY}/.env <<-EOM &&
 		APP_ENV=${APP_ENV}
-		APP_DEBUG=true
+		APP_DEBUG=false
 		APP_KEY=${APP_KEY}
 		APP_URL=${APP_URL}
         DB_DATABASE=${APP_DATABASE_FILE}
@@ -52,6 +61,7 @@ function write_config() {
         TUSUPLOAD_HOST=0.0.0.0
         TUSUPLOAD_HTTP_PATH=/video.uploads/
         TUSUPLOAD_URL=${APP_URL}video.uploads/
+		KLINK_REGISTRY_URL=${KLINK_REGISTRY_URL}
 	EOM
 
 	echo "- ENV file written! $INSTALL_DIRECTORY/.env"
