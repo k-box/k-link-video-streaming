@@ -9,6 +9,8 @@
 
         <!-- Styles -->
         <link rel="stylesheet" href="{{ url((string)mix('css/app.css')) }}" preload>
+
+        @stack('meta')
     </head>
     <body>
         @yield('content')

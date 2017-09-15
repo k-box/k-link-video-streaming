@@ -9,11 +9,11 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 use App\VideoRepository;
 use Illuminate\Support\Facades\Storage;
 
-class VideoPlaybackControllerTest extends TestCase
+class VideoEmbedControllerTest extends TestCase
 {
     use DatabaseMigrations, DatabaseTransactions, WithoutMiddleware;
 
-    public function test_playback_page_loads()
+    public function test_embed_page_loads()
     {
         Storage::fake('videos');
         
@@ -27,16 +27,15 @@ class VideoPlaybackControllerTest extends TestCase
 
         $this->actingAsApplication(1);
 
-        $response = $this->get('/play/' . $video->video_id);
+        $response = $this->get('/embed/' . $video->video_id);
         
-        $response->assertViewIs('video');
+        $response->assertViewIs('embed');
         $response->assertViewHas('video');
         $response->assertSee('data-dash="'. $video->dash_stream .'"');
-        $response->assertSee('application/json+oembed');
         
     }
 
-    public function test_playback_page_loads_if_video_is_processing()
+    public function test_embed_page_loads_if_video_is_processing()
     {
         Storage::fake('videos');
         
@@ -46,9 +45,9 @@ class VideoPlaybackControllerTest extends TestCase
 
         $this->actingAsApplication(1);
 
-        $response = $this->get('/play/' . $video->video_id);
+        $response = $this->get('/embed/' . $video->video_id);
         
-        $response->assertViewIs('video');
+        $response->assertViewIs('embed');
         $response->assertViewHas('video');
         $response->assertDontSee('data-dash');
         
