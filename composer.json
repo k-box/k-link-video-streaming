@@ -1,8 +1,8 @@
 {
-    "name": "klink/video-streaming",
+    "name": "oneofftech/video-streaming",
     "description": "The K-Link Video Streaming service.",
-    "keywords": ["video", "streaming", "dash", "mp4"],
-    "license": "GPLv3",
+    "keywords": ["video", "streaming", "dash", "mp4", "embed"],
+    "license": "AGPL-3.0",
     "type": "project",
     "repositories": [
         {

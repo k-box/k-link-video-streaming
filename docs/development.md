@@ -1,5 +1,7 @@
 # Development
 
+This project is based on the [Laravel Framework](https://laravel.com/docs)
+
 ## Local Development
 
 ### K-Link Registry
@@ -10,6 +12,18 @@ If you want to perform integration testing while in a `local` environment, the v
 
 In production, or when running the Docker image, the `KLINK_REGISTRY_URL` environment variable is mandatory.
 
+### Database
+
+The service stores information in a SQlite database. During local development the database file resides in `./database` and is named `database.sqlite`.
+
+Laravel needs an existing database file, so you can create a new file with
+
+```
+php -r "touch('./database/database.sqlite');"
+```
+
+You can also configure the [location of the database](./../config/database.php) via [environment variables](https://laravel.com/docs/5.5/configuration#environment-configuration).
+To do so use the `DB_DATABASE` variable, which expects the path of the database file
 
 ### Common Problems
 

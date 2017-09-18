@@ -3,12 +3,16 @@
 ## before, execute
 ## docker build -t video-streaming .
 
-kvss:
+video_streaming:
   image: "video-streaming"
   environment:
     APP_URL: "http://localhost:8080/"
     APP_KEY: "set-a-32-character-random-string"
     ## The URL of the K-Link Registry that will be used to authenticate requests
     # KLINK_REGISTRY_URL: "" 
+  ## Volumes
+  # volumes:
+  ##  Automatic volume, change it to be persistent
+  #   - "/var/www/vss/storage"
   ports:
     - "8080:80"
