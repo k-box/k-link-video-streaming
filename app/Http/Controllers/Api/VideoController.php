@@ -38,14 +38,14 @@ class VideoController extends Controller
     public function store(VideoAddRequest $request)
     {
         $upload = $this->uploads->create(
-            $request->user() || 1, 
+            $request->user()->getAuthIdentifier() /* as application_id */, 
             $request->input('id'), 
             $request->input('params.filename'), 
             (int)$request->input('params.filesize'),
             $request->input('params.filetype', null));
 
         $video = $this->videos->create(
-            $request->user() || 1 /* as application_id */, 
+            $request->user()->getAuthIdentifier() /* as application_id */, 
             $upload->id,
             $request->input('params.filename'),
             $request->input('params.filetype', null),
