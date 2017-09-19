@@ -57,6 +57,7 @@ image_build:
     - shell
     - deploy
   script:
+    - docker login -u $REGISTRY_RELEASE_USERNAME -p $REGISTRY_RELEASE_PASSWORD $CI_REGISTRY
     - docker build -t $CI_REGISTRY_IMAGE:${CI_BUILD_REF_NAME/v/} .
     - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
     - docker push $CI_REGISTRY_IMAGE:${CI_BUILD_REF_NAME/v/}

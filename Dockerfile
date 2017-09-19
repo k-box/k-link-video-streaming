@@ -1,4 +1,4 @@
-FROM docker.klink.asia/alessio.vertemati/video-processing-cli:latest
+FROM docker.klink.asia/images/video-processing-cli:0.1.0
 
 FROM php:7.0.21-fpm
 
