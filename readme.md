@@ -34,7 +34,7 @@ An [example Docker Compose file](./docker-compose.yml) is available in the root 
 
 There are 3 parameters that must be configured in order to run the Docker image:
 
-1. `APP_URL`: the URL on which the service will be publicly accessible, e.g. `domain.com/video` or `video.domain.com`
+1. `APP_URL`: the URL on which the service will be publicly accessible, e.g. `https://domain.com/video` or `https://video.domain.com`
 2. `APP_KEY`: the 32 characters random string to be used for encrypting cookies or other values that might need a secure storage
 3. `KLINK_REGISTRY_URL`: the URL of the K-Link Registry service that will authorize applications to add or delete videos
 
