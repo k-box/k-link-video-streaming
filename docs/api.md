@@ -38,6 +38,8 @@ The body must have two properties
 
 The `id` is verified to be unique.
 
+> Make sure all your requests send and expect `application/json`, i.e. `Content-Type: application/json` and `Accept: application/json` headers are set.
+
 ## Actions
 
 ### `video.add`

@@ -65,7 +65,7 @@ class KlinkRegistryGuard extends TokenGuard
          $token = $this->getTokenForRequest();
          $source = $this->getSourceForRequest();
  
-         if (! empty($token)) {
+         if (! empty($token) && ! empty($source)) {
              $user = $this->provider->retrieveByCredentials(
                  [$this->storageKey => $token,
                   $this->sourceKey => $source]
@@ -91,6 +91,10 @@ class KlinkRegistryGuard extends TokenGuard
             $this->storageKey => $credentials[$this->inputKey],
             $this->sourceKey => $this->getSourceForRequest(),
         ];
+
+        if (empty($credentials[$this->sourceKey])) {
+            return false;
+        }
         
         if ($this->provider->retrieveByCredentials($credentials)) {
             return true;

@@ -66,4 +66,115 @@ class KlinkRegistryGuardTest extends TestCase
         $this->assertNotNull($application);
         $this->assertEquals(1, $application->getAuthIdentifier());
     }
+    
+    public function test_empty_origin_is_handled()
+    {
+
+        $token = '123456A';
+        $domain = '';
+
+        $expectedCredentialsArray = [
+            "api_token" => $token,
+            "api_calling_url" => $domain
+        ];
+
+        $userProvider = Mockery::mock(KlinkRegistryUserProvider::class);
+        
+        $userProvider->shouldNotReceive('retrieveByCredentials');
+
+        $request = Request::createFromBase(
+            SymfonyRequest::create(
+                '/endpoint', 
+                'POST', 
+                ['api_token' => $token], 
+                [], 
+                [], 
+                [ 
+                    'HTTP_ORIGIN' => $domain]));
+
+        $guard = new KlinkRegistryGuard($userProvider, $request);
+
+        $isValid = $guard->validate([
+            'api_token' => $token,
+            'api_calling_url' => $domain]);
+        
+        $application = $guard->user();
+
+        $this->assertFalse($isValid);
+        $this->assertNull($application);
+    }
+    
+    public function test_empty_token_is_handled()
+    {
+
+        $token = '';
+        $domain = 'http://something.com';
+
+        $expectedCredentialsArray = [
+            "api_token" => $token,
+            "api_calling_url" => $domain
+        ];
+
+        $userProvider = Mockery::mock(KlinkRegistryUserProvider::class);
+        
+        $userProvider->shouldNotReceive('retrieveByCredentials');
+
+        $request = Request::createFromBase(
+            SymfonyRequest::create(
+                '/endpoint', 
+                'POST', 
+                ['api_token' => $token], 
+                [], 
+                [], 
+                [ 
+                    'HTTP_ORIGIN' => $domain]));
+
+        $guard = new KlinkRegistryGuard($userProvider, $request);
+
+        $isValid = $guard->validate([
+            'api_token' => $token,
+            'api_calling_url' => $domain]);
+        
+        $application = $guard->user();
+
+        $this->assertFalse($isValid);
+        $this->assertNull($application);
+    }
+    
+    public function test_empty_token_and_origin_is_handled()
+    {
+
+        $token = '';
+        $domain = '';
+
+        $expectedCredentialsArray = [
+            "api_token" => $token,
+            "api_calling_url" => $domain
+        ];
+
+        $userProvider = Mockery::mock(KlinkRegistryUserProvider::class);
+        
+        $userProvider->shouldNotReceive('retrieveByCredentials');
+
+        $request = Request::createFromBase(
+            SymfonyRequest::create(
+                '/endpoint', 
+                'POST', 
+                ['api_token' => $token], 
+                [], 
+                [], 
+                [ 
+                    'HTTP_ORIGIN' => $domain]));
+
+        $guard = new KlinkRegistryGuard($userProvider, $request);
+
+        $isValid = $guard->validate([
+            'api_token' => $token,
+            'api_calling_url' => $domain]);
+        
+        $application = $guard->user();
+
+        $this->assertFalse($isValid);
+        $this->assertNull($application);
+    }
 }
