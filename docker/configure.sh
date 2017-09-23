@@ -45,7 +45,7 @@ function write_config() {
         exit 1
     fi
 
-    if [[ -z "$KLINK_REGISTRY_URL" ]]; then
+    if [[ -z "$KLINK_REGISTRY_URL" && "$APP_ENV" != 'local' ]]; then
         echo "ERROR. Required KLINK_REGISTRY_URL environment variable is missing. Aborting the startup."
         exit 1
     fi
