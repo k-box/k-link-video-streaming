@@ -25,6 +25,16 @@ php -r "touch('./database/database.sqlite');"
 You can also configure the [location of the database](./../config/database.php) via [environment variables](https://laravel.com/docs/5.5/configuration#environment-configuration).
 To do so use the `DB_DATABASE` variable, which expects the path of the database file
 
+### Video processing
+
+The video processing is performed thanks to the [Video Processing CLI](https://git.klink.asia/main/video-processing-cli). The binary, and its dependencies, are not downloaded/installed by default.
+
+To pull them execute
+
+```
+composer run install-video-cli
+```
+
 ### Common Problems
 
 #### How I can upload a video file?
@@ -37,4 +47,6 @@ For the `video.uploads` part you need a TUS client. An client that can be used i
 
 #### Video Pipeline is not working, `ffprobe` or `ffmpeg` missing
 
-This is because the `video-processing-cli` expects to find the binaries in a `./bin` folder in the same folder it is launched. Make sure to launch the `video-processing-cli` executable from the `/bin` (located in the root of the project)
+This is because the `video-processing-cli` expects to find the binaries in a `./bin` folder in the same folder it is launched. Make sure to launch the `video-processing-cli` executable from the `/bin` (located in the root of the project).
+
+In addition check that the binary files are executable

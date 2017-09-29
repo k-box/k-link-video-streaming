@@ -18,14 +18,16 @@ variables:
 
 unit_test:
   stage: test
-  image: "docker.klink.asia/main/docker-php:7.0-alpine"
+  image: "docker.klink.asia/main/docker-php:7.0"
   script:
     - export COMPOSER_CACHE_DIR=`pwd`/.composer-cache
     - cp .env.example .env
     - composer install --prefer-dist
+    - composer run install-video-cli
+    - chmod +x ./bin/bin/packager-linux
     - php artisan key:generate
     - php artisan config:clear
-    - vendor/bin/phpunit --exclude-group cli-required
+    - vendor/bin/phpunit
   tags:
     - docker
   artifacts:
