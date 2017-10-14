@@ -72,10 +72,14 @@ class VideoCli
         $process->setTimeout(null);
         $process->setIdleTimeout(null);
 
-        $process->run();
+        try {
+            $process->mustRun();
 
-        if (!$process->isSuccessful()) {
-            throw new VideoProcessingFailedException((new ProcessFailedException($process))->getMessage());
+            if (! $process->isSuccessful()) {
+                throw new VideoProcessingFailedException((new ProcessFailedException($process))->getMessage());
+            }
+        } catch (ProcessFailedException $ex) {
+            throw new VideoProcessingFailedException($ex->getMessage());
         }
     }
 
@@ -100,6 +104,15 @@ class VideoCli
         return $this->process ? $this->process->getErrorOutput() : null;
     }
 
+    /**
+     * Return the command exit code
+     *
+     * @return int
+     */
+    public function exitCode()
+    {
+        return $this->process ? $this->process->getExitCode() : -1;
+    }
 
     private function getVideoCliExecutable()
     {

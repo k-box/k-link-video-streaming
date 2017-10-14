@@ -56,11 +56,15 @@
         "post-update-cmd": [
             "Illuminate\\Foundation\\ComposerScripts::postUpdate",
             "php artisan optimize"
+        ],
+        "install-video-cli": [
+            "App\\ComposerScripts::postInstall"
         ]
     },
     "config": {
         "preferred-install": "dist",
         "sort-packages": true,
-        "optimize-autoloader": true
+        "optimize-autoloader": true,
+        "video-cli-download-url": "https://git.klink.asia/main/video-processing-cli/builds/artifacts/v0.2.0/browse?job=package"
     }
 }
