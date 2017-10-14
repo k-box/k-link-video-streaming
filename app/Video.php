@@ -389,7 +389,7 @@ class Video extends Model
       public function getPosterAttribute($value = null)
       {
             if($this->completed){
-                return Storage::disk('videos')->url("$this->video_id/$this->video_id.jpg");
+                return Storage::disk('videos')->url("$this->video_id/$this->video_id.png");
             }
 
             return null;
