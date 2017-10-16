@@ -1134,7 +1134,7 @@
             "source": {
                 "type": "git",
                 "url": "https://git.klink.asia/main/k-registry-client.git",
-                "reference": "f7fde06f85a2961b7276381fa940e254e44b16e7"
+                "reference": "7ff1dacc57dad1455fe46df9976d3ccc21329dbc"
             },
             "require": {
                 "guzzlehttp/psr7": "^1.3",
@@ -1171,7 +1171,7 @@
                 "k-search",
                 "oneofftech"
             ],
-            "time": "2017-10-16 13:48:03"
+            "time": "2017-10-16 14:41:00"
         },
         {
             "name": "paragonie/random_compat",
