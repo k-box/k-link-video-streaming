@@ -30,9 +30,9 @@ class Client implements ClientContract
         try
         {            
             $application = $this->client->getApplication($token, $applicationUrl, $permissions);
-            
+
             return new Application([
-                'application_id' => $application->getApplicationId(),
+                'application_id' => $application->getAppId(),
                 'url' => $applicationUrl,
                 'permissions' => $permissions
             ]);

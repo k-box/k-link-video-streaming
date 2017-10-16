@@ -19,9 +19,12 @@
         "avvertix/laravel-tus-upload": "dev-master",
         "endyjasmi/cuid": "2.0.*",
         "fideloper/proxy": "3.3.*",
+        "guzzlehttp/psr7": "^1.4",
         "laravel/framework": "5.4.*",
         "laravel/tinker": "1.0.*",
-        "oneofftech/k-link-registry-client": "0.1.*"
+        "oneofftech/k-link-registry-client": "dev-update",
+        "php-http/guzzle6-adapter": "^1.1",
+        "php-http/message": "^1.6"
     },
     "require-dev": {
         "fzaninotto/faker": "1.7.*",
