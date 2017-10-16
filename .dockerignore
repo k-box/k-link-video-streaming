@@ -6,6 +6,8 @@ server.php
 webpack.mix.js
 node_modules
 storage
+public/storage
+public/videos
 bin/bin
 bin/video-processing*
 bin/*.lock

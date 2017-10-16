@@ -135,6 +135,7 @@ function init_empty_dir() {
         echo "-- [logs] created."
     fi
 
+    php artisan videostorage:link
 }
 
 startup_config >&2

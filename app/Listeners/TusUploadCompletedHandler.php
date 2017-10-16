@@ -59,12 +59,14 @@ class TusUploadCompletedHandler
 
             Log::info("Moving from {$source} to {$destination}");
             rename($source, $destination);
-
+            
             // mark as queued and add the video to the processing queue
-
+            
             $video->queued = true;
             
             $video->save();
+            
+            Log::info("Dispatching {$video->video_id} to the video-processing queue...");
 
             $job = (new ConvertVideo($video))->onQueue('video-processing');
             

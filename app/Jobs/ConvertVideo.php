@@ -47,6 +47,8 @@ class ConvertVideo implements ShouldQueue
 
         try{
 
+            Log::info("Convert started for {$this->video->video_id}...");
+
             $originalVideoFile = $this->video->file;
 
             if(!$originalVideoFile->isFile()){
@@ -57,9 +59,11 @@ class ConvertVideo implements ShouldQueue
 
             $videoProcessor = app()->make(VideoProcessorFactory::class)->make();
 
-            $videoProcessor->streamify($originalVideoFile->getRealPath());
+            $out = $videoProcessor->streamify($originalVideoFile->getRealPath());
             
             $videoProcessor->thumbnail($originalVideoFile->getRealPath());
+
+            Log::info('Video conversion completed', ['out' => $out]);
 
             // monitor its status
 
