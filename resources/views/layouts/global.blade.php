@@ -8,7 +8,7 @@
         <title>{{ config('app.name') }}</title>
 
         <!-- Styles -->
-        <link rel="stylesheet" href="{{ url((string)mix('css/app.css')) }}" preload>
+        <link rel="stylesheet" href="{{ mix_url('css/app.css') }}" preload>
 
         @stack('meta')
     </head>

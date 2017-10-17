@@ -6,7 +6,7 @@
 
 </video>
 
-<script src="{{ url((string)mix('js/app.js')) }}"></script>
+<script src="{{ mix_url('js/app.js') }}"></script>
 <script>
     (function () {
         var player = new StreamPlayer(document.querySelector('#the-player'));

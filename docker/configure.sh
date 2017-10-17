@@ -59,8 +59,6 @@ function write_config() {
 		TRUSTED_PROXY_IP=${TRUSTED_PROXY_IP}
         TUSUPLOAD_USE_PROXY=true
         TUSUPLOAD_HOST=0.0.0.0
-        TUSUPLOAD_HTTP_PATH=/video.uploads/
-        TUSUPLOAD_URL=${APP_URL}video.uploads/
 		KLINK_REGISTRY_URL=${KLINK_REGISTRY_URL}
 	EOM
 
@@ -74,6 +72,7 @@ function install_or_update() {
         touch "${APP_DATABASE_FILE}"
     fi
 
+    php artisan videodeploy:link
     php artisan migrate --force
 
     chgrp -R $SETUP_WWWUSER $APP_DATABASE_FILE && \

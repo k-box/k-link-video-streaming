@@ -23,15 +23,20 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        if(app()->environment('production')){
-            // Forcing the root URL to be as configured
-            // This is currently required in production as the application 
-            // might be proxied under an alias, but globally configured 
-            // to run in the root. The current Docker deployment requires 
-            // this if proxies under a location that is not the root, 
-            // like "/video"
-            url()->forceRootUrl(config('app.url'));
+        
+        // Forcing the root URL to be as configured
+        // This is currently required in production as the application 
+        // might be proxied under an alias, but globally configured 
+        // to run in the root. The current Docker deployment requires 
+        // this if proxies under a location that is not the root, 
+        // like "/video"
+        
+        if(app()->runningInConsole()){
+            if(!empty(config('deployment.sub_folder'))){
+                url()->forceRootUrl( rtrim(config('app.url'), config('deployment.sub_folder') . '/') . '/' );
+            }
         }
+        
 
         parent::boot();
     }
@@ -59,7 +64,7 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected function mapWebRoutes()
     {
-        Route::middleware('web')
+        Route::prefix(config('deployment.sub_folder'))->middleware('web')
              ->namespace($this->namespace)
              ->group(base_path('routes/web.php'));
     }
@@ -73,7 +78,7 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected function mapApiRoutes()
     {
-        Route::prefix('api')
+        Route::prefix(!empty(config('deployment.sub_folder')) ? config('deployment.sub_folder') .'/api' : 'api')
              ->middleware('api')
              ->namespace($this->namespace)
              ->group(base_path('routes/api.php'));

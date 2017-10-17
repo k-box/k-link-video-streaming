@@ -12,7 +12,7 @@ return [
     |
     */
 
-    'public_url' => env('TUSUPLOAD_URL') ?: config('app.url') . '/video.upload',
+    'public_url' => rtrim(env('APP_URL'), '/') . '/video.uploads/',
     
     
     /*
