@@ -42,6 +42,8 @@ By default the storage folder is not persisted, therefore is highly suggested to
 
 If you are running the service behind a reverse proxy see [Running behind a (reverse) proxy](./docs/behind-proxy.md).
 
+> sub-folder deployments, like `https://domain.com/video`, are available only if the service is [running behind a reverse proxy](./docs/behind-proxy.md#sub-folder-deployment-with-a-proxy)
+
 ## Usage and Documentation
 
 The documentation is available in the [`/docs`](./docs/) sub-folder.

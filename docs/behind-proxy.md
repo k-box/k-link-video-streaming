@@ -36,3 +36,11 @@ environment:
     TRUSTED_PROXY_IP: "192.168.0.25"
     # other environment variable omitted
 ```
+
+## Sub-folders deployment with a Proxy
+
+Sometimes you might want to expose the application on a specific path instead of registering a sub-domain, like http://pretty.domain/video.
+
+In case you're doing this kind of deployment configure the (Reverse) Proxy to **not strip** `/video` and make sure the `APP_URL` environment variable for the service contains the full URL with the `/video/` path. In this way the application knows it has to serve the application at that path, even if is not existing.
+
+> In sub-folder deployment style we recommend Docker based deployments

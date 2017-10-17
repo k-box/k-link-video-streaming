@@ -43,7 +43,7 @@ To upload a file you need to follow the [video upload guide](./video-upload.md) 
 
 For the `video.add` request you could use any program that will let you generate JSON requests, like Curl or [Insomnia](https://insomnia.rest/) for example.
 
-For the `video.uploads` part you need a TUS client. An client that can be used is [tus-client-cli](https://github.com/avvertix/tus-client-cli), which is Open Source and available as a single command line executable.
+For the `video.uploads` part you need a TUS client. A client that can be used is [tus-client-cli](https://github.com/avvertix/tus-client-cli), which is Open Source and available as a single command line executable.
 
 #### Video Pipeline is not working, `ffprobe` or `ffmpeg` missing
 
