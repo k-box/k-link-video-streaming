@@ -22,7 +22,7 @@
         "guzzlehttp/psr7": "^1.4",
         "laravel/framework": "5.4.*",
         "laravel/tinker": "1.0.*",
-        "oneofftech/k-link-registry-client": "dev-update",
+        "oneofftech/k-link-registry-client": "0.1.*",
         "php-http/guzzle6-adapter": "^1.1",
         "php-http/message": "^1.6"
     },
