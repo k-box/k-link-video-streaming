@@ -83,7 +83,9 @@ class ComposerScripts
 
                 $executor = new ProcessExecutor($io);
 
-                $command = './'.basename($fileName).' fetch:dependencies';
+                $command_filename = $os!=='windows' ? './' . basename($fileName) : basename($fileName);
+
+                $command = $command_filename.' fetch:dependencies';
 
                 $exitCode = $executor->execute($command, $executorOutput, $folder);
                 
@@ -126,7 +128,10 @@ class ComposerScripts
                 throw new \Exception('Expecting to find the location of the artifact package, but got nothing');
             }
 
-            $location = rtrim(trim(substr($interesting_headers[0], 9)), 'browse').'file';
+            $location_header = array_pop($interesting_headers);
+
+
+            $location = rtrim(trim(substr($location_header, 9)), 'browse').'raw';
 
             $os = strtolower(PHP_OS);
             
