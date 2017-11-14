@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [0.2.0] - 2017-11-14
+
+### Added
+
+- Allow KLINK_REGISTRY_URL if APP_ENV is local
+- Automatic Download of video transcoding pipeline
+- OEMBED Support
+- Sub-folder style deployment
+
+### Fixed
+
+- URL typos in configuration examples
+- Using outdated K-Registry version
+
 ## [0.1.0] - 2017-09-19
 
 ### Added 
