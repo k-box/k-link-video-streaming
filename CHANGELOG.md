@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [0.2.1] - 2017-11-20
+### Changed
+
+- Updated video processing cli to version 0.3.1
+
 ## [0.2.0] - 2017-11-14
 
 ### Added
