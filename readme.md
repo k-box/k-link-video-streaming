@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/k-box/k-link-video-streaming.svg?branch=master)](https://travis-ci.org/k-box/k-link-video-streaming)
+
 # K-Link Video Streaming service
 
 An API driven service for uploading, converting and delivering video streams.
