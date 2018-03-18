@@ -10,8 +10,8 @@
             </div>
 
             <div class="links">
-                <a href="https://git.klink.asia/alessio.vertemati/video-streaming-service/tree/master/docs">Documentation</a>
-                <a href="https://git.klink.asia/alessio.vertemati/video-streaming-service">Gitlab</a>
+                <a href="https://github.com/k-box/k-link-video-streaming/tree/master/docs">Documentation</a>
+                <a href="https://github.com/k-box/k-link-video-streaming">GitHub</a>
             </div>
         </div>
     </div>
