@@ -1,6 +1,6 @@
-FROM docker.klink.asia/images/video-processing-cli:0.3.1
+FROM docker.klink.asia/images/video-processing-cli:0.4.0
 
-FROM php:7.0.21-fpm
+FROM php:7.0-fpm
 
 ### NGINX version, mainline for debian:jessie as the base image is based on debian:jessie
 ENV NGINX_VERSION 1.11.9-1~jessie 
