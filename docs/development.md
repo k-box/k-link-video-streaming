@@ -27,7 +27,7 @@ To do so use the `DB_DATABASE` variable, which expects the path of the database 
 
 ### Video processing
 
-The video processing is performed thanks to the [Video Processing CLI](https://git.klink.asia/main/video-processing-cli). The binary, and its dependencies, are not downloaded/installed by default.
+The video processing is performed thanks to the [Video Processing CLI](https://github.com/OneOffTech/video-processing-cli). The binary, and its dependencies, are not downloaded/installed by default.
 
 To pull them execute
 

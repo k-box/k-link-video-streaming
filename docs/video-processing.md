@@ -17,7 +17,7 @@ The jobs added to the queue are stored in the database and processed sequentiall
 
 ## Requirements
 
-The Video convertion and DASH manifest generation are delegated to the [Video Processing CLI](https://git.klink.asia/alessio.vertemati/video-processing-cli). 
+The Video convertion and DASH manifest generation are delegated to the [Video Processing CLI](https://github.com/OneOffTech/video-processing-cli). 
 
 > Please download the binaries and save it under `./bin` before proceeding
 
@@ -26,9 +26,9 @@ The Video convertion and DASH manifest generation are delegated to the [Video Pr
 
 The processing output are a set of video files and a mdp file.
 
-The number downscaled of video files outputted depends on the original video resolution. If the original video was a 1080p then 3 video files are generated: 720p, 540p and 360p. The lower the resolution is less, the less videos are generated. For example if the original video is 360p, no scaled down video files are generated.
+The number of video files depends on the original video resolution. If the original video was a 1080p then 4 video files are generated: 1080p, 720p, 540p and 360p. The lower the resolution is, the less videos are generated. For example if the original video is 360p, a repacked 360p is generated.
 
-The video files are named with the same name of the original video file, suffixed with
+The video files are named according to the pattern
 
 ```
 {original_name}[-{resolution}]_{stream}.mp4
@@ -43,8 +43,8 @@ As an example consider a video named `Butterfly.mp4` recorded with a 1920x1080 p
 The pipeline will generate:
 
 - `Butterfly.mdp`
-- `Butterfly_video.mp4`
-- `Butterfly_audio.mp4`
+- `Butterfly-1080_video.mp4`
+- `Butterfly-1080_audio.mp4`
 - `Butterfly-720_video.mp4`
 - `Butterfly-720_audio.mp4`
 - `Butterfly-540_video.mp4`
