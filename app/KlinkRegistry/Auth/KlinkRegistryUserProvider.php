@@ -73,7 +73,7 @@ class KlinkRegistryUserProvider implements UserProvider
         // sometimes applications might not send a URL with an ending slash
         $app = $this->client->retrieveApplication(
             $credentials['api_token'],
-            $credentials['api_calling_url'],
+            rtrim($credentials['api_calling_url'], '/'),
             ['data-add', 'data-remove-own']
         );
 
