@@ -69,9 +69,21 @@ class KlinkRegistryUserProvider implements UserProvider
      */
     public function retrieveByCredentials(array $credentials)
     {
-        return $this->client->retrieveApplication(
+        // we do the double check as the K-Link Registry do a strict comparison of the URL
+        // sometimes applications might not send a URL with an ending slash
+        $app = $this->client->retrieveApplication(
             $credentials['api_token'],
             $credentials['api_calling_url'],
+            ['data-add', 'data-remove-own']
+        );
+
+        if(!is_null($app)){
+            return $app;
+        }
+
+        return $this->client->retrieveApplication(
+            $credentials['api_token'],
+            rtrim($credentials['api_calling_url'], '/') . '/',
             ['data-add', 'data-remove-own']
         );
     }
