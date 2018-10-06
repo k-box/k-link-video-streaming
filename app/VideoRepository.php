@@ -3,7 +3,7 @@
 namespace App;
 
 use App\Video;
-use Avvertix\TusUpload\TusUpload;
+use OneOffTech\TusUpload\TusUpload;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
 use Illuminate\Contracts\Filesystem\Factory as Storage;

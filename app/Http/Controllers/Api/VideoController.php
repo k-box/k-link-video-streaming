@@ -8,12 +8,12 @@ use App\Http\Requests\VideoAddRequest;
 use App\Http\Requests\VideoGetRequest;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Avvertix\TusUpload\TusUploadRepository;
+use OneOffTech\TusUpload\TusUploadRepository;
 
 class VideoController extends Controller
 {
     /**
-     * @var \Avvertix\TusUpload\TusUploadRepository
+     * @var \OneOffTech\TusUpload\TusUploadRepository
      */
      private $uploads = null;
     

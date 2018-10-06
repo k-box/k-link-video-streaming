@@ -1,26 +1,22 @@
 {
-    "name": "oneofftech/video-streaming",
+    "name": "k-box/k-link-video-streaming ",
     "description": "The K-Link Video Streaming service.",
-    "keywords": ["video", "streaming", "dash", "mp4", "embed"],
-    "license": "AGPL-3.0",
+    "keywords": ["video", "streaming", "dash", "mp4", "embed", "laravel", "api"],
+    "license": "AGPL-3.0-only",
     "type": "project",
     "repositories": [
         {
             "type": "vcs",
             "url": "https://git.klink.asia/alessio.vertemati/laravel-tus-upload"
-        },
-        {
-            "type": "vcs",
-            "url": "https://git.klink.asia/main/k-registry-client.git"
         }
     ],
     "require": {
-        "php": ">=7.0.0",
-        "avvertix/laravel-tus-upload": "dev-master",
+        "php": ">=7.1.0",
+        "oneofftech/laravel-tus-upload": "0.4.*",
         "endyjasmi/cuid": "2.0.*",
         "fideloper/proxy": "3.3.*",
         "guzzlehttp/psr7": "^1.4",
-        "laravel/framework": "5.4.*",
+        "laravel/framework": "5.5.*",
         "laravel/tinker": "1.0.*",
         "oneofftech/k-link-registry-client": "0.1.*",
         "php-http/guzzle6-adapter": "^1.1",
@@ -28,8 +24,10 @@
     },
     "require-dev": {
         "fzaninotto/faker": "1.7.*",
-        "mockery/mockery": "0.9.*",
-        "phpunit/phpunit": "5.7.*"
+        "friendsofphp/php-cs-fixer": "^2.3",
+        "filp/whoops": "~2.0",
+        "mockery/mockery": "~1.0",
+        "phpunit/phpunit": "~6.0"
     },
     "autoload": {
         "classmap": [
@@ -53,15 +51,17 @@
             "php -r \"touch('./database/database.sqlite');\""
         ],
         "post-create-project-cmd": [
-            "php artisan key:generate"
+            "@php artisan key:generate"
+        ],
+        "post-autoload-dump": [
+			"Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
+            "@php artisan package:discover"
         ],
         "post-install-cmd": [
-            "Illuminate\\Foundation\\ComposerScripts::postInstall",
-            "php artisan optimize"
+            "Illuminate\\Foundation\\ComposerScripts::postInstall"
         ],
         "post-update-cmd": [
-            "Illuminate\\Foundation\\ComposerScripts::postUpdate",
-            "php artisan optimize"
+            "Illuminate\\Foundation\\ComposerScripts::postUpdate"
         ],
         "install-video-cli": [
             "App\\ComposerScripts::postInstall"
@@ -71,6 +71,6 @@
         "preferred-install": "dist",
         "sort-packages": true,
         "optimize-autoloader": true,
-        "video-cli-download-url": "https://github.com/OneOffTech/video-processing-cli/releases/download/v0.4.0/video-processing-cli"
+        "video-cli-download-url": "https://github.com/OneOffTech/video-processing-cli/releases/download/v0.4.1/video-processing-cli"
     }
 }

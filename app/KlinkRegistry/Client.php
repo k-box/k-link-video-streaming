@@ -2,11 +2,12 @@
 
 namespace App\KlinkRegistry;
 
-use App\KlinkRegistry\Contracts\Client as ClientContract;
-use App\Application;
-use OneOffTech\KLinkRegistryClient\Client as KRegistryClient;
-use Exception;
 use Log;
+use Exception;
+use App\Application;
+use OneOffTech\KLinkRegistryClient\ApiClient;
+use App\KlinkRegistry\Contracts\Client as ClientContract;
+use OneOffTech\KLinkRegistryClient\HttpClientConfigurator;
 
 class Client implements ClientContract
 {
@@ -21,7 +22,11 @@ class Client implements ClientContract
      */
     public function __construct($url)
     {
-        $this->client = (new KRegistryClient($url))->access();
+        $configurator = (new HttpClientConfigurator())->setEndpoint(rtrim($url, '/'));
+        
+        $apiClient = ApiClient::fromConfigurator($configurator);
+
+        $this->client = $apiClient->access();
     }
 
 
