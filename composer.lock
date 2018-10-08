@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "96ba646ae3e4da980fba7ec38d52cc15",
+    "content-hash": "d1c569b9a1b79c7ed40d6b11faf3d70f",
     "packages": [
         {
             "name": "clue/stream-filter",
@@ -1246,11 +1246,17 @@
         },
         {
             "name": "oneofftech/laravel-tus-upload",
-            "version": "v0.4.0",
+            "version": "v0.5.0",
             "source": {
                 "type": "git",
-                "url": "https://git.klink.asia/alessio.vertemati/laravel-tus-upload",
-                "reference": "0ae1b6de76406595cc679cc434b39cb8b84ddff6"
+                "url": "https://github.com/OneOffTech/laravel-tus-upload.git",
+                "reference": "7901de73e7b4daa860ec380ddde25256c8160553"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/OneOffTech/laravel-tus-upload/zipball/7901de73e7b4daa860ec380ddde25256c8160553",
+                "reference": "7901de73e7b4daa860ec380ddde25256c8160553",
+                "shasum": ""
             },
             "require": {
                 "illuminate/auth": "~5.5.0|~5.6.0",
@@ -1271,7 +1277,7 @@
             "type": "project",
             "extra": {
                 "brach-alias": {
-                    "dev-master": "0.4.x-dev"
+                    "dev-master": "0.5.x-dev"
                 },
                 "laravel": {
                     "providers": [
@@ -1290,11 +1296,7 @@
                     "src/helpers.php"
                 ]
             },
-            "autoload-dev": {
-                "psr-4": {
-                    "Tests\\": "tests/"
-                }
-            },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -1305,7 +1307,7 @@
                 "tus",
                 "upload"
             ],
-            "time": "2018-04-27T16:11:59+00:00"
+            "time": "2018-10-08T09:52:29+00:00"
         },
         {
             "name": "paragonie/random_compat",
@@ -5364,7 +5366,7 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=7.0.0"
+        "php": ">=7.1.0"
     },
     "platform-dev": []
 }
