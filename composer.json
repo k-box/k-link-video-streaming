@@ -4,12 +4,6 @@
     "keywords": ["video", "streaming", "dash", "mp4", "embed", "laravel", "api"],
     "license": "AGPL-3.0-only",
     "type": "project",
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://git.klink.asia/alessio.vertemati/laravel-tus-upload"
-        }
-    ],
     "require": {
         "php": ">=7.1.0",
         "oneofftech/laravel-tus-upload": "0.5.*",
