@@ -18,7 +18,7 @@ variables:
 
 unit_test:
   stage: test
-  image: "docker.klink.asia/main/docker-php:7.0"
+  image: "docker.klink.asia/main/docker-php:7.1"
   script:
     - export COMPOSER_CACHE_DIR=`pwd`/.composer-cache
     - cp .env.example .env
@@ -39,7 +39,7 @@ unit_test:
 
 image_prepare:
   stage: build
-  image: "docker.klink.asia/main/docker-php:7.0-alpine"
+  image: "docker.klink.asia/main/docker-php:7.1-alpine"
   script:
     - export COMPOSER_CACHE_DIR=`pwd`/.composer-cache
     - composer install --prefer-dist --no-dev

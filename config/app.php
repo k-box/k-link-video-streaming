@@ -166,8 +166,8 @@ return [
         /*
          * Package Service Providers...
          */
-        Laravel\Tinker\TinkerServiceProvider::class,
-        Avvertix\TusUpload\Providers\TusUploadServiceProvider::class,
+        // Laravel\Tinker\TinkerServiceProvider::class,
+        // OneOffTech\TusUpload\Providers\TusUploadServiceProvider::class,
         Fideloper\Proxy\TrustedProxyServiceProvider::class,
 
         /*

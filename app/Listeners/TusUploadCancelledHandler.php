@@ -2,7 +2,7 @@
 
 namespace App\Listeners;
 
-use Avvertix\TusUpload\Events\TusUploadCancelled;
+use OneOffTech\TusUpload\Events\TusUploadCancelled;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use App\VideoRepository;

@@ -5,7 +5,7 @@ namespace Tests\Unit;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
-use Avvertix\TusUpload\TusUpload;
+use OneOffTech\TusUpload\TusUpload;
 use App\VideoRepository;
 use App\Video;
 use Illuminate\Support\Facades\Storage;

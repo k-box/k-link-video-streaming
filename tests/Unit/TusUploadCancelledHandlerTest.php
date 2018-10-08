@@ -8,9 +8,9 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use App\Video;
 use App\VideoRepository;
-use Avvertix\TusUpload\TusUpload;
+use OneOffTech\TusUpload\TusUpload;
 use Illuminate\Support\Facades\Storage;
-use Avvertix\TusUpload\Events\TusUploadCancelled;
+use OneOffTech\TusUpload\Events\TusUploadCancelled;
 use App\Listeners\TusUploadCancelledHandler;
 use Carbon\Carbon;
 

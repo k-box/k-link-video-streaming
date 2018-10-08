@@ -1,13 +1,10 @@
-FROM docker.klink.asia/images/video-processing-cli:0.4.0
+FROM docker.klink.asia/images/video-processing-cli:0.4.1
 
-FROM php:7.0-fpm
-
-### NGINX version, mainline for debian:jessie as the base image is based on debian:jessie
-ENV NGINX_VERSION 1.11.9-1~jessie 
+FROM php:7.1-fpm
 
 ## Default environment variables
 ENV INSTALL_DIRECTORY /var/www/vss
-ENV PHP_MAX_EXECUTION_TIME 120
+ENV PHP_MAX_EXECUTION_TIME 240
 ENV PHP_MAX_INPUT_TIME 120
 ENV PHP_MEMORY_LIMIT 288M
 
@@ -18,10 +15,11 @@ RUN apt-get update -yqq && \
         libfreetype6-dev \
         libjpeg62-turbo-dev \
         libmcrypt-dev \
-        libpng12-dev \
+        libpng-dev \
         libbz2-dev \
         gettext \
         supervisor \
+        cron \
     && docker-php-ext-install -j$(nproc) iconv mcrypt \
     && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
     && docker-php-ext-install -j$(nproc) gd \
@@ -37,16 +35,35 @@ RUN locale-gen "en_US.UTF-8" \
  	&& /usr/sbin/update-locale LANG="C.UTF-8"
 
 ## NGINX installation
-### This will install nginx for debian:jessie as the base PHP image is still based on debian:jessie
-RUN apt-key adv --keyserver hkp://pgp.mit.edu:80 --recv-keys 573BFD6B3D8FBC641079A6ABABF5BD827BD9BF62 \
-	&& echo "deb http://nginx.org/packages/mainline/debian/ jessie nginx" >> /etc/apt/sources.list \
+### The installation procedure is heavily inspired from https://github.com/nginxinc/docker-nginx
+RUN set -e; \
+	NGINX_GPGKEY=573BFD6B3D8FBC641079A6ABABF5BD827BD9BF62; \
+	NGINX_VERSION=1.14.0-1~stretch; \
+	found=''; \
+	apt-get update; \
+	apt-get install -y gnupg; \
+	for server in \
+		ha.pool.sks-keyservers.net \
+		hkp://keyserver.ubuntu.com:80 \
+		hkp://p80.pool.sks-keyservers.net:80 \
+		pgp.mit.edu \
+	; do \
+		echo "Fetching GPG key $NGINX_GPGKEY from $server"; \
+		apt-key adv --keyserver "$server" --keyserver-options timeout=10 --recv-keys "$NGINX_GPGKEY" && found=yes && break; \
+	done; \
+	test -z "$found" && echo >&2 "error: failed to fetch GPG key $NGINX_GPGKEY" && exit 1; \
+    echo "deb http://nginx.org/packages/debian/ stretch nginx" >> /etc/apt/sources.list \
 	&& apt-get update \
 	&& apt-get install --no-install-recommends --no-install-suggests -y \
 						ca-certificates \
 						nginx=${NGINX_VERSION} \
 						# nginx-module-njs=${NJS_VERSION} \
 						# gettext-base \
-	&& rm -rf /var/lib/apt/lists/*
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
+## Configure cron to run Laravel scheduler
+RUN echo '* * * * * php /var/www/dms/artisan schedule:run >> /dev/null 2>&1' | crontab -
 
 ## Copy NGINX default configuration
 COPY docker/nginx-default.conf /etc/nginx/conf.d/default.conf

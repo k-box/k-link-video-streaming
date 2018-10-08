@@ -7,7 +7,7 @@ use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use App\Video;
-use Avvertix\TusUpload\TusUpload;
+use OneOffTech\TusUpload\TusUpload;
 
 class VideoTest extends TestCase
 {

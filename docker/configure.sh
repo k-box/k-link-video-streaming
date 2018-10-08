@@ -24,8 +24,8 @@ function startup_config () {
     echo "- Changing folder groups and permissions" &&
     chgrp -R $SETUP_WWWUSER $INSTALL_DIRECTORY/storage &&
     chgrp -R $SETUP_WWWUSER $INSTALL_DIRECTORY/bootstrap/cache &&
-    chgrp -R $SETUP_WWWUSER $INSTALL_DIRECTORY/vendor/avvertix/laravel-tus-upload/bin/ &&
-    chmod +x $INSTALL_DIRECTORY/vendor/avvertix/laravel-tus-upload/bin/tusd-linux &&
+    chgrp -R $SETUP_WWWUSER $INSTALL_DIRECTORY/vendor/oneofftech/laravel-tus-upload/bin/ &&
+    chmod +x $INSTALL_DIRECTORY/vendor/oneofftech/laravel-tus-upload/bin/tusd-linux &&
     chmod -R g+rw $INSTALL_DIRECTORY/bootstrap/cache &&
     chmod -R g+rw $INSTALL_DIRECTORY/storage &&
     normalize_line_endings &&
@@ -82,18 +82,18 @@ function install_or_update() {
 
 function normalize_line_endings() {
 
-    cp $INSTALL_DIRECTORY/vendor/avvertix/laravel-tus-upload/hooks/linux/pre-create $INSTALL_DIRECTORY/vendor/avvertix/laravel-tus-upload/hooks/linux/pre-create-original \
-    && cp $INSTALL_DIRECTORY/vendor/avvertix/laravel-tus-upload/hooks/linux/post-receive $INSTALL_DIRECTORY/vendor/avvertix/laravel-tus-upload/hooks/linux/post-receive-original \
-    && cp $INSTALL_DIRECTORY/vendor/avvertix/laravel-tus-upload/hooks/linux/post-finish $INSTALL_DIRECTORY/vendor/avvertix/laravel-tus-upload/hooks/linux/post-finish-original \
-    && cp $INSTALL_DIRECTORY/vendor/avvertix/laravel-tus-upload/hooks/linux/post-terminate $INSTALL_DIRECTORY/vendor/avvertix/laravel-tus-upload/hooks/linux/post-terminate-original \
+    cp $INSTALL_DIRECTORY/vendor/oneofftech/laravel-tus-upload/hooks/linux/pre-create $INSTALL_DIRECTORY/vendor/oneofftech/laravel-tus-upload/hooks/linux/pre-create-original \
+    && cp $INSTALL_DIRECTORY/vendor/oneofftech/laravel-tus-upload/hooks/linux/post-receive $INSTALL_DIRECTORY/vendor/oneofftech/laravel-tus-upload/hooks/linux/post-receive-original \
+    && cp $INSTALL_DIRECTORY/vendor/oneofftech/laravel-tus-upload/hooks/linux/post-finish $INSTALL_DIRECTORY/vendor/oneofftech/laravel-tus-upload/hooks/linux/post-finish-original \
+    && cp $INSTALL_DIRECTORY/vendor/oneofftech/laravel-tus-upload/hooks/linux/post-terminate $INSTALL_DIRECTORY/vendor/oneofftech/laravel-tus-upload/hooks/linux/post-terminate-original \
 
-    tr -d '\r' < $INSTALL_DIRECTORY/vendor/avvertix/laravel-tus-upload/hooks/linux/pre-create-original > $INSTALL_DIRECTORY/vendor/avvertix/laravel-tus-upload/hooks/linux/pre-create
-    tr -d '\r' < $INSTALL_DIRECTORY/vendor/avvertix/laravel-tus-upload/hooks/linux/post-receive-original > $INSTALL_DIRECTORY/vendor/avvertix/laravel-tus-upload/hooks/linux/post-receive
-    tr -d '\r' < $INSTALL_DIRECTORY/vendor/avvertix/laravel-tus-upload/hooks/linux/post-finish-original > $INSTALL_DIRECTORY/vendor/avvertix/laravel-tus-upload/hooks/linux/post-finish
-    tr -d '\r' < $INSTALL_DIRECTORY/vendor/avvertix/laravel-tus-upload/hooks/linux/post-terminate-original > $INSTALL_DIRECTORY/vendor/avvertix/laravel-tus-upload/hooks/linux/post-terminate
+    tr -d '\r' < $INSTALL_DIRECTORY/vendor/oneofftech/laravel-tus-upload/hooks/linux/pre-create-original > $INSTALL_DIRECTORY/vendor/oneofftech/laravel-tus-upload/hooks/linux/pre-create
+    tr -d '\r' < $INSTALL_DIRECTORY/vendor/oneofftech/laravel-tus-upload/hooks/linux/post-receive-original > $INSTALL_DIRECTORY/vendor/oneofftech/laravel-tus-upload/hooks/linux/post-receive
+    tr -d '\r' < $INSTALL_DIRECTORY/vendor/oneofftech/laravel-tus-upload/hooks/linux/post-finish-original > $INSTALL_DIRECTORY/vendor/oneofftech/laravel-tus-upload/hooks/linux/post-finish
+    tr -d '\r' < $INSTALL_DIRECTORY/vendor/oneofftech/laravel-tus-upload/hooks/linux/post-terminate-original > $INSTALL_DIRECTORY/vendor/oneofftech/laravel-tus-upload/hooks/linux/post-terminate
 
-    chgrp -R $SETUP_WWWUSER $INSTALL_DIRECTORY/vendor/avvertix/laravel-tus-upload/hooks/linux/ \
-    && chmod -R +x $INSTALL_DIRECTORY/vendor/avvertix/laravel-tus-upload/hooks/linux/
+    chgrp -R $SETUP_WWWUSER $INSTALL_DIRECTORY/vendor/oneofftech/laravel-tus-upload/hooks/linux/ \
+    && chmod -R +x $INSTALL_DIRECTORY/vendor/oneofftech/laravel-tus-upload/hooks/linux/
 }
 
 function init_empty_dir() {

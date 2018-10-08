@@ -2,7 +2,7 @@
 
 namespace App\Listeners;
 
-use Avvertix\TusUpload\Events\TusUploadCompleted;
+use OneOffTech\TusUpload\Events\TusUploadCompleted;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Contracts\Filesystem\Factory as Storage;
