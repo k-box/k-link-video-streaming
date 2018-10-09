@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [0.3.0] - 2018-10-09
+
+### Changed
+
+- Upgrade to Laravel 5.5 ([#5](https://github.com/k-box/k-link-video-streaming/pull/5))
+- Update laravel-tus package to version 0.5.0 ([#5](https://github.com/k-box/k-link-video-streaming/pull/5))
+- PHP version requirement changed to PHP 7.1
+
+### Fixed
+
+- Request authentication via K-Link Registry ([#4](https://github.com/k-box/k-link-video-streaming/pull/4))
+
 ## [0.2.1] - 2017-11-20
 ### Changed
 
