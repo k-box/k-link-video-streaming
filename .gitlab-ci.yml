@@ -11,6 +11,11 @@ cache:
   paths:
   - .composer-cache/
 
+before_script:
+  - export IMAGE_TAG="${CI_COMMIT_REF_NAME#v}_${CI_COMMIT_SHA:0:10}"
+  - export CLEANED_CI_COMMIT_REF_NAME="${CI_COMMIT_REF_NAME#v}"
+  - export COMPOSER_CACHE_DIR=`pwd`/.composer-cache
+
 variables:
     CONTAINER_RELEASE_IMAGE_BASE: $CI_REGISTRY/images/video-streaming-service
 
@@ -20,7 +25,6 @@ unit_test:
   stage: test
   image: "docker.klink.asia/main/docker-php:7.1"
   script:
-    - export COMPOSER_CACHE_DIR=`pwd`/.composer-cache
     - cp .env.example .env
     - composer install --prefer-dist
     - composer run install-video-cli
@@ -41,7 +45,6 @@ image_prepare:
   stage: build
   image: "docker.klink.asia/main/docker-php:7.1-alpine"
   script:
-    - export COMPOSER_CACHE_DIR=`pwd`/.composer-cache
     - composer install --prefer-dist --no-dev
     - php artisan config:clear
   tags:
@@ -59,10 +62,11 @@ image_build:
     - shell
     - deploy
   script:
-    - docker login -u $REGISTRY_RELEASE_USERNAME -p $REGISTRY_RELEASE_PASSWORD $CI_REGISTRY
-    - docker build -t $CI_REGISTRY_IMAGE:${CI_BUILD_REF_NAME/v/} .
     - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
-    - docker push $CI_REGISTRY_IMAGE:${CI_BUILD_REF_NAME/v/}
+    - docker build -t $CI_REGISTRY_IMAGE:${IMAGE_TAG} .
+    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
+    - docker push $CI_REGISTRY_IMAGE:${IMAGE_TAG}
+    - docker rmi $CI_REGISTRY_IMAGE:${IMAGE_TAG}
 
 ## Publishing the docker image on the final Docker registry
 
@@ -74,9 +78,9 @@ image_publish:
     - dind
   script:
     - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
-    - docker pull $CI_REGISTRY_IMAGE:${CI_BUILD_REF_NAME/v/}
+    - docker pull $CI_REGISTRY_IMAGE:${IMAGE_TAG}
     - docker login -u $REGISTRY_RELEASE_USERNAME -p $REGISTRY_RELEASE_PASSWORD $CI_REGISTRY
-    - docker tag $CI_REGISTRY_IMAGE:${CI_BUILD_REF_NAME/v/} "$CONTAINER_RELEASE_IMAGE_BASE:${CI_BUILD_REF_NAME/v/}"
-    - docker tag $CI_REGISTRY_IMAGE:${CI_BUILD_REF_NAME/v/} "$CONTAINER_RELEASE_IMAGE_BASE:latest"
+    - docker tag $CI_REGISTRY_IMAGE:${IMAGE_TAG} "$CONTAINER_RELEASE_IMAGE_BASE:${CLEANED_CI_COMMIT_REF_NAME}"
+    - docker tag $CI_REGISTRY_IMAGE:${IMAGE_TAG} "$CONTAINER_RELEASE_IMAGE_BASE:latest"
     - docker push "$CONTAINER_RELEASE_IMAGE_BASE:latest"
-    - docker push "$CONTAINER_RELEASE_IMAGE_BASE:${CI_BUILD_REF_NAME/v/}"
+    - docker push "$CONTAINER_RELEASE_IMAGE_BASE:${CLEANED_CI_COMMIT_REF_NAME}"
