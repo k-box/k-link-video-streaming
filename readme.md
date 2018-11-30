@@ -29,7 +29,7 @@ The K-Link Video Streaming service is available as single Docker image
 docker pull docker.klink.asia/images/video-streaming-service
 ```
 
-An example usage is available in the [Docker Compose file](./docker-compose.yml) located in the root of this repository.
+An example usage is available in the [Docker Compose Example file](./docker-compose.example.yml) located in the root of this repository.
 
 **configuration**
 
