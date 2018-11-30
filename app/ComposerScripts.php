@@ -85,7 +85,7 @@ class ComposerScripts
 
                 $command_filename = $os!=='windows' ? './'.basename($fileName) : basename($fileName);
 
-                $command = $command_filename.' fetch:dependencies';
+                $command = $command_filename.' fetch:binaries';
 
                 $exitCode = $executor->execute($command, $executorOutput, $folder);
                 
