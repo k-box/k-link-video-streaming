@@ -43,7 +43,7 @@ unit_test:
 
 image_prepare:
   stage: build
-  image: "docker.klink.asia/main/docker-php:7.1-alpine"
+  image: "docker.klink.asia/main/docker-php:7.1"
   script:
     - composer install --prefer-dist --no-dev
     - php artisan config:clear
