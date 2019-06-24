@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/k-box/k-link-video-streaming.svg?branch=master)](https://travis-ci.org/k-box/k-link-video-streaming)
+[![Build Status](https://travis-ci.com/k-box/k-link-video-streaming.svg?branch=master)](https://travis-ci.com/k-box/k-link-video-streaming)
 
 # K-Link Video Streaming service
 
@@ -26,7 +26,7 @@ In addition to modern browsers we support IE10 (on best effort) and IE11. IE 9 a
 The K-Link Video Streaming service is available as single Docker image
 
 ```
-docker pull docker.klink.asia/images/video-streaming-service
+docker pull klinktech/k-link-video-streaming
 ```
 
 An example usage is available in the [Docker Compose Example file](./docker-compose.example.yml) located in the root of this repository.
